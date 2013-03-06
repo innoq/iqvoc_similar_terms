@@ -7,6 +7,12 @@ module Iqvoc
       "Labeling::SKOS::HiddenLabel" => 1
     }
 
+    # returns an array of label/concepts pairs, sorted descendingly by weighting
+    def self.ranked(lang, *terms) # TODO: rename
+      weighted(lang, *terms).sort_by { |label, data| data[0] }.reverse.
+          map { |label, data| [label] + data[1..-1] } # drop weighting
+    end
+
     # returns a hash of label/weighting+concepts pairs
     def self.weighted(lang, *terms) # TODO: rename
       return terms.inject({}) do |memo, term|

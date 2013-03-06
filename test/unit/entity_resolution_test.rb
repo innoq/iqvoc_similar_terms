@@ -6,7 +6,7 @@ require 'iqvoc/similar_terms' # XXX: should not be necessary!?
 class EntityResolutionTest < ActiveSupport::TestCase
 
   setup do
-    forest = Iqvoc::RDFAPI.devour(:forest, "a", "skos:Concept")
+    forest = Iqvoc::RDFAPI.devour(":forest", "a", "skos:Concept")
     Iqvoc::RDFAPI.devour(forest, "skos:prefLabel", '"forest"@en')
     Iqvoc::RDFAPI.devour(forest, "skos:altLabel", '"woods"@en')
     forest.save
