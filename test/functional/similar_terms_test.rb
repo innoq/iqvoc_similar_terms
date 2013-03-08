@@ -17,7 +17,11 @@ class SimilarTermsTest < ActionController::TestCase
     end
 
     get :show, :lang => "en", :format => "ttl"
-    assert_response :success
+    assert_response 400
+
+    get :show, :lang => "en", :format => "ttl", :terms => "foo"
+    assert_response 200
+    assert !@response.body.include?("a sdc:Result")
   end
 
 end
