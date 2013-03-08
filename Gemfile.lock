@@ -1,3 +1,21 @@
+GIT
+  remote: git://github.com/innoq/iqvoc.git
+  revision: 7450eed76fd10238995ab5609631f760af5c6b48
+  specs:
+    iqvoc (4.0.8)
+      authlogic
+      bundler
+      cancan
+      fastercsv
+      iq_rdf (~> 0.1.2)
+      iq_triplestorage
+      json
+      kaminari
+      rails (~> 3.2.1)
+      rails_autolink
+      sass-rails (~> 3.2.5)
+      simple_form
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -43,19 +61,6 @@ GEM
       builder
       bundler
     iq_triplestorage (0.2.2)
-    iqvoc (4.0.8)
-      authlogic
-      bundler
-      cancan
-      fastercsv
-      iq_rdf (~> 0.1.2)
-      iq_triplestorage
-      json
-      kaminari
-      rails (~> 3.2.1)
-      rails_autolink
-      sass-rails (~> 3.2.5)
-      simple_form
     journey (1.0.4)
     json (1.7.7)
     kaminari (0.14.1)
@@ -124,7 +129,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  iqvoc (~> 4.0.0)
+  iqvoc!
   minitest
   rails (~> 3.2.1)
   spork

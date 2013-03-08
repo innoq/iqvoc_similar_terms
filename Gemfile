@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '~> 3.2.1'
-gem 'iqvoc', '~> 4.0.0'
+gem 'iqvoc', :git => 'git://github.com/innoq/iqvoc.git'
 
 group :development, :test do
   platforms :ruby do
