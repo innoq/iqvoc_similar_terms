@@ -1,5 +1,7 @@
 # encoding: UTF-8
 
+require 'iqvoc/similar_terms' # XXX: should not be necessary!?
+
 class SimilarTermsController < ApplicationController
 
   def show
@@ -10,10 +12,15 @@ class SimilarTermsController < ApplicationController
       return
     end
 
-    terms = Iqvoc::InlineDataHelper.parse_inline_values(params[:terms])
+    @terms = Iqvoc::InlineDataHelper.parse_inline_values(params[:terms])
     lang = params[:lang]
 
-    head :ok
+    @results = Iqvoc::SimilarTerms.ranked(lang, *@terms)
+
+    respond_to do |format|
+      format.ttl
+      format.rdf
+    end
   end
 
 end

@@ -41,6 +41,7 @@ class SimilarTermsTest < ActionController::TestCase
     assert @response.body.include?(<<-EOS)
 :forest a skos:Concept.
     EOS
+    # XXX: `:result<n>` as subject doesn't actually make sense because it's not a dereferenceable resource
     assert @response.body.include?(<<-EOS)
 :result1 a sdc:Result;
          sdc:link :forest;
