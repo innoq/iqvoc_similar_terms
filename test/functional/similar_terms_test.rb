@@ -40,20 +40,25 @@ class SimilarTermsTest < ActionController::TestCase
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
     EOS
     assert @response.body.include?(<<-EOS)
+@prefix query: <http://test.host/en/similar.ttl?terms=forest#>.
+    EOS
+    assert @response.body.include?(<<-EOS)
+query:top a sdc:Query;
+    EOS
+    assert @response.body.include?(<<-EOS)
+query:result1 a sdc:Result;
+              rdfs:label "forest"@en;
+              sdc:rank 1;
+              sdc:link :forest.
+    EOS
+    assert @response.body.include?(<<-EOS)
+query:result2 a sdc:Result;
+              rdfs:label "woods"@en;
+              sdc:rank 2;
+              sdc:link :forest.
+    EOS
+    assert @response.body.include?(<<-EOS)
 :forest a skos:Concept.
-    EOS
-    # XXX: `:result<n>` as subject doesn't actually make sense because it's not a dereferenceable resource
-    assert @response.body.include?(<<-EOS)
-:result1 a sdc:Result;
-         sdc:link :forest;
-         skos:prefLabel "forest"@en;
-         sdc:rank 1.
-    EOS
-    assert @response.body.include?(<<-EOS)
-:result2 a sdc:Result;
-         sdc:link :forest;
-         skos:altLabel "woods"@en
-         sdc:rank 2.
     EOS
   end
 

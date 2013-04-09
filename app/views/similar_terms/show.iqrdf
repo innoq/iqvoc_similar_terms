@@ -2,25 +2,36 @@ Iqvoc.default_rdf_namespace_helper_methods.each do |meth|
   document.namespaces(self.send(meth))
 end
 
-document.namespaces(:sdc => "http://sindice.com/vocab/search#")
+subject = url_for(request.query_parameters.
+    merge(:only_path => false, :anchor => ""))
 
-subject = url_for(request.query_parameters.merge(:only_path => false))
-subject = URI.parse(subject)
-document << IqRdf.build_full_uri_subject(subject,
+document.namespaces(:sdc => "http://sindice.com/vocab/search#",
+    :query => subject)
+
+document << IqRdf::Query.build_uri("top",
     IqRdf::Sdc::build_uri("Query")) do |query|
   query.Sdc::totalResults(@results.length)
   query.Sdc::itemsPerPage(@results.length) # XXX: premilinary
   query.Sdc::searchTerms(@terms) # XXX: serialization format?
-end
 
-@results.each_with_index do |(label, concepts), i|
-  concepts.each do |concept|
-    subject = URI.parse(url_for(concept))
-    IqRdf.build_full_uri_subject(subject, IqRdf::Rdf::type, IqRdf::Skos::Concept)
+  skos = IqRdf::Namespace.find_namespace_class("skos")
+  @results.each_with_index do |data, i|
+    i += 1
+
+    # XXX: data structure smell
+    label = data[0]
+    concepts = data[1..-1]
+
+    result = "result#{i}"
+    query.Sdc::result(IqRdf::Query::build_uri(result))
+    document << IqRdf::Query::build_uri(result,
+        IqRdf::Sdc::build_uri("Result")) do |sbj|
+      sbj.Rdfs::label(label.value, :lang => label.language)
+      sbj.Sdc::rank(i)
+      concepts.each do |concept|
+        sbj.Sdc::link(IqRdf.build_uri(concept.origin))
+        document << IqRdf.build_uri(concept.origin, skos.build_uri("Concept"))
+      end
+    end
   end
-
-  IqRdf::Sdc::Result(IqRdf::Sdc::build_uri("Result"))
-
-  IqRdf.build_full_uri_subject(subject,
-    IqRdf::Sdc::build_uri("Query")) do |query|
 end
