@@ -60,6 +60,8 @@ query:result2 a sdc:Result;
     assert @response.body.include?(<<-EOS)
 :forest a skos:Concept.
     EOS
+    # ensure there are no duplicates
+    assert_equal 2, @response.body.split("a skos:Concept").length
   end
 
 end

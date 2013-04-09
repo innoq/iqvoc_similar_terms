@@ -15,6 +15,7 @@ document << IqRdf::Query.build_uri("top",
   query.Sdc::searchTerms(@terms) # XXX: serialization format?
 
   skos = IqRdf::Namespace.find_namespace_class("skos")
+  processed_concepts = {} # XXX: crutch
   @results.each_with_index do |data, i|
     i += 1
 
@@ -30,7 +31,10 @@ document << IqRdf::Query.build_uri("top",
       sbj.Sdc::rank(i)
       concepts.each do |concept|
         sbj.Sdc::link(IqRdf.build_uri(concept.origin))
-        document << IqRdf.build_uri(concept.origin, skos.build_uri("Concept"))
+        unless processed_concepts[concept.origin]
+          document << IqRdf.build_uri(concept.origin, skos.build_uri("Concept"))
+          processed_concepts[concept.origin] = true
+        end
       end
     end
   end
