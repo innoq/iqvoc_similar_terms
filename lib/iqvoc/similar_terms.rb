@@ -15,8 +15,9 @@ module Iqvoc
 
     # returns a hash of label/weighting+concepts pairs
     def self.weighted(lang, *terms) # TODO: rename
+      concepts = terms_to_concepts(lang, *terms)
       return terms.inject({}) do |memo, term|
-        term_to_concepts(term, lang).each do |concept|
+        concepts.each do |concept|
           concept.labelings.each do |ln|
             concept = ln.owner
             label = ln.target # XXX: not loaded eagerly
@@ -34,21 +35,23 @@ module Iqvoc
       end
     end
 
-    def self.term_to_concepts(term, lang)
-      return term_to_labels(term, lang).includes(:labelings => :owner).
+    def self.terms_to_concepts(lang, *terms)
+      return terms_to_labels(lang, *terms).includes(:labelings => :owner).
           map { |label| label.labelings.map(&:owner) }.flatten.uniq
     end
 
     # NB: case-insensitive only when inflectionals are available
-    def self.term_to_labels(term, lang)
+    def self.terms_to_labels(lang, *terms)
       if Iqvoc.const_defined?(:Inflectionals)
         raise NotImplementedError # TODO
         # use normalized form for case-insensitivity (and performance)
         hash = Inflectional::Base.normalize(term)
       elsif Iqvoc.const_defined?(:XLLabel)
-        return Iqvoc::XLLabel.base_class.where(:value => term, :language => lang)
+        return Iqvoc::XLLabel.base_class.where(:language => lang,
+            :value => terms.length < 2 ? terms[0] : terms)
       else
-        return Iqvoc::Label.base_class.where(:value => term, :language => lang)
+        return Iqvoc::Label.base_class.where(:language => lang,
+            :value => terms.length < 2 ? terms[0] : terms)
       end
     end
 

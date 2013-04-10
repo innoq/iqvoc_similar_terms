@@ -11,6 +11,11 @@ class ResultsTest < ActiveSupport::TestCase
     Iqvoc::RDFAPI.devour(forest, "skos:prefLabel", '"forest"@en')
     Iqvoc::RDFAPI.devour(forest, "skos:altLabel", '"woods"@en')
     forest.save
+
+    car = Iqvoc::RDFAPI.devour(":car", "a", "skos:Concept")
+    Iqvoc::RDFAPI.devour(car, "skos:prefLabel", '"car"@en')
+    Iqvoc::RDFAPI.devour(car, "skos:altLabel", '"automobile"@en')
+    car.save
   end
 
   test "ranked results" do
@@ -20,7 +25,18 @@ class ResultsTest < ActiveSupport::TestCase
     assert_equal "forest", results[0][0].value
     assert_equal ":forest", results[0][1].origin
     assert_equal "woods", results[1][0].value
+    assert_equal ":forest", results[1][1].origin
+
+    results = Iqvoc::SimilarTerms.ranked("en", "woods", "car")
+    assert_equal 4, results.length
+    assert_equal "forest", results[0][0].value
     assert_equal ":forest", results[0][1].origin
+    assert_equal "car", results[1][0].value
+    assert_equal ":car", results[1][1].origin
+    assert_equal "woods", results[2][0].value
+    assert_equal ":forest", results[2][1].origin
+    assert_equal "automobile", results[3][0].value
+    assert_equal ":car", results[3][1].origin
   end
 
   test "weighted results" do

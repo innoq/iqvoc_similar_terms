@@ -12,6 +12,11 @@ class SimilarTermsTest < ActionController::TestCase
     Iqvoc::RDFAPI.devour(forest, "skos:prefLabel", '"forest"@en')
     Iqvoc::RDFAPI.devour(forest, "skos:altLabel", '"woods"@en')
     forest.save
+
+    car = Iqvoc::RDFAPI.devour(":car", "a", "skos:Concept")
+    Iqvoc::RDFAPI.devour(car, "skos:prefLabel", '"car"@en')
+    Iqvoc::RDFAPI.devour(car, "skos:altLabel", '"automobile"@en')
+    car.save
   end
 
   test "routing" do
