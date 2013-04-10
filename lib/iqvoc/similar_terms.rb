@@ -15,7 +15,8 @@ module Iqvoc
 
     # returns a hash of label/weighting+concepts pairs
     def self.weighted(lang, *terms) # TODO: rename
-      concepts = terms_to_concepts(lang, *terms)
+      concepts = terms_to_concepts(lang, *terms).
+          includes(:labelings => [:owner, :target])
       return terms.inject({}) do |memo, term|
         concepts.each do |concept|
           concept.labelings.each do |ln|
@@ -36,8 +37,9 @@ module Iqvoc
     end
 
     def self.terms_to_concepts(lang, *terms)
-      return terms_to_labels(lang, *terms).includes(:labelings => :owner).
-          map { |label| label.labelings.map(&:owner) }.flatten.uniq
+      concept_ids = terms_to_labels(lang, *terms).includes(:labelings).
+          map { |label| label.labelings.map(&:owner_id) }.flatten.uniq
+      return Iqvoc::Concept.base_class.where(:id => concept_ids)
     end
 
     # NB: case-insensitive only when inflectionals are available
