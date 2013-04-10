@@ -37,6 +37,7 @@ class ResultsTest < ActiveSupport::TestCase
     assert_equal ":forest", results[2][1].origin
     assert_equal "automobile", results[3][0].value
     assert_equal ":car", results[3][1].origin
+    assert_equal results[0].length, results[0].uniq.length
   end
 
   test "weighted results" do

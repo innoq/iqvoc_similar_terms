@@ -30,6 +30,7 @@ module Iqvoc
             memo[label][0] += weight
             # associated concepts
             memo[label] << concept
+            memo[label].uniq! # XXX: inefficient!? (can't easily use Set here though)
           end
         end
         memo

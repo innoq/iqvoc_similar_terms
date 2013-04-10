@@ -11,8 +11,8 @@ document.namespaces(:sdc => "http://sindice.com/vocab/search#",
 document << IqRdf::Query.build_uri("top",
     IqRdf::Sdc::build_uri("Query")) do |query|
   query.Sdc::totalResults(@results.length)
-  query.Sdc::itemsPerPage(@results.length) # XXX: premilinary
-  query.Sdc::searchTerms(@terms) # XXX: serialization format?
+  query.Sdc::itemsPerPage(@results.length) # XXX: preliminary
+  query.Sdc::searchTerms(@terms)
 
   skos = IqRdf::Namespace.find_namespace_class("skos")
   processed_concepts = {} # XXX: crutch
