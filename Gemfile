@@ -19,6 +19,4 @@ end
 
 group :test do
   gem 'minitest'
-  gem 'spork'
-  gem 'spork-minitest'
 end

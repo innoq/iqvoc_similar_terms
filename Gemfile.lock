@@ -132,9 +132,6 @@ GEM
       actionpack (~> 3.0)
       activemodel (~> 3.0)
     slop (3.4.4)
-    spork (0.9.2)
-    spork-minitest (0.0.3)
-      spork
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -167,8 +164,6 @@ DEPENDENCIES
   pry-debugger
   pry-rails
   rails (~> 3.2.1)
-  spork
-  spork-minitest
   sqlite3
   unicorn
   zeus

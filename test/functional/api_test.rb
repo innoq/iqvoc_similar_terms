@@ -8,7 +8,7 @@ class SimilarTermsTest < ActionController::TestCase
   setup do
     @controller = SimilarTermsController.new
 
-    forest = Iqvoc::RDFAPI.devour("forest", "a", "skos:Concept") # XXX: should be ":forest", but https://github.com/innoq/iqvoc/issues/195
+    forest = Iqvoc::RDFAPI.devour("forest", "a", "skos:Concept") # FIXME: should be ":forest", but https://github.com/innoq/iqvoc/issues/195
     Iqvoc::RDFAPI.devour(forest, "skos:prefLabel", '"forest"@en')
     Iqvoc::RDFAPI.devour(forest, "skos:altLabel", '"woods"@en')
     forest.save
