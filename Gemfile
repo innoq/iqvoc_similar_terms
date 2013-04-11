@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'iqvoc'
+gem 'iqvoc_skosxl'
 gem 'iqvoc_similar_terms', :path => '../'
 
 group :development, :test do

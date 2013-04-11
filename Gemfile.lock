@@ -71,6 +71,9 @@ GEM
       rails_autolink
       sass-rails (~> 3.2.5)
       simple_form
+    iqvoc_skosxl (2.0.2)
+      bundler
+      iqvoc (~> 4.0.0)
     journey (1.0.4)
     json (1.7.7)
     kaminari (0.14.1)
@@ -148,6 +151,7 @@ PLATFORMS
 DEPENDENCIES
   iqvoc
   iqvoc_similar_terms!
+  iqvoc_skosxl
   pry-debugger
   pry-rails
   sqlite3
