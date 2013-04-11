@@ -71,6 +71,10 @@ GEM
       rails_autolink
       sass-rails (~> 3.2.5)
       simple_form
+    iqvoc_inflectionals (2.0.3)
+      iqvoc (~> 4.0.0)
+      iqvoc_skosxl (~> 2.0.0)
+      rails (~> 3.2.1)
     iqvoc_skosxl (2.0.2)
       bundler
       iqvoc (~> 4.0.0)
@@ -150,6 +154,7 @@ PLATFORMS
 
 DEPENDENCIES
   iqvoc
+  iqvoc_inflectionals
   iqvoc_similar_terms!
   iqvoc_skosxl
   pry-debugger
