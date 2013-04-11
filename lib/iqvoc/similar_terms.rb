@@ -2,9 +2,13 @@ module Iqvoc
   module SimilarTerms # TODO: make language constraints optional
 
     WEIGHTINGS = { # XXX: hard-coded - should be read from configuration
-      "Labeling::SKOS::PrefLabel"   => 5,
-      "Labeling::SKOS::AltLabel"    => 2,
-      "Labeling::SKOS::HiddenLabel" => 1
+      "Labeling::SKOS::PrefLabel"     => 5,
+      "Labeling::SKOS::AltLabel"      => 2,
+      "Labeling::SKOS::HiddenLabel"   => 1,
+      # SKOS-XL
+      "Labeling::SKOSXL::PrefLabel"   => 5,
+      "Labeling::SKOSXL::AltLabel"    => 2,
+      "Labeling::SKOSXL::HiddenLabel" => 1
     }
 
     # returns an array of label/concepts pairs, sorted descendingly by weighting
@@ -21,7 +25,7 @@ module Iqvoc
         concepts.each do |concept|
           concept.labelings.each do |ln|
             concept = ln.owner
-            label = ln.target # XXX: not loaded eagerly
+            label = ln.target
             weight = WEIGHTINGS[ln.class.name]
 
             memo[label] ||= []
@@ -30,7 +34,7 @@ module Iqvoc
             memo[label][0] += weight
             # associated concepts
             memo[label] << concept
-            memo[label].uniq! # XXX: inefficient!? (can't easily use Set here though)
+            memo[label].uniq! # XXX: inefficient!? can't easily use Set here though
           end
         end
         memo
