@@ -9,7 +9,6 @@ group :development, :test do
   gem 'pry-debugger'
   gem 'hirb-unicode'
   gem 'zeus'
-  gem 'unicorn'
   gem 'cane'
 
   platforms :ruby do
