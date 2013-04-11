@@ -49,16 +49,22 @@ module Iqvoc
 
     # NB: case-insensitive only when inflectionals are available
     def self.terms_to_labels(lang, *terms)
+      # efficiency enhancement to turn `IN` into `=` queries where possible
+      reduce = lambda { |arr| arr.length < 2 ? arr[0] : arr }
+
       if Iqvoc.const_defined?(:Inflectionals)
-        raise NotImplementedError # TODO
         # use normalized form for case-insensitivity (and performance)
-        hash = Inflectional::Base.normalize(term)
+        hashes = terms.map { |term| Inflectional::Base.normalize(term) }
+        label_ids = Inflectional::Base.select([:label_id]).
+            where(:normal_hash => reduce.call(hashes)).map(&:label_id)
+        return Iqvoc::XLLabel.base_class.where(:language => lang,
+            :id => reduce.call(label_ids))
       elsif Iqvoc.const_defined?(:XLLabel)
         return Iqvoc::XLLabel.base_class.where(:language => lang,
-            :value => terms.length < 2 ? terms[0] : terms)
+            :value => reduce.call(terms))
       else
         return Iqvoc::Label.base_class.where(:language => lang,
-            :value => terms.length < 2 ? terms[0] : terms)
+            :value => reduce.call(terms))
       end
     end
 
