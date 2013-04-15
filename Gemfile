@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem 'iqvoc'
 gem 'iqvoc_skosxl'
 gem 'iqvoc_inflectionals'
-gem 'iqvoc_similar_terms', :path => '../'
+gem 'iqvoc_similar_terms'
 
 group :development, :test do
   gem 'pry-rails'
