@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/innoq/iqvoc_skosxl.git
+  revision: 6b671432ae00edbec987c4c2f883551b21a16a96
+  specs:
+    iqvoc_skosxl (2.0.2)
+      bundler
+      iqvoc (~> 4.0.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -73,9 +81,6 @@ GEM
     iqvoc_similar_terms (0.1.0)
       iqvoc (~> 4.0.0)
       rails (~> 3.2.1)
-    iqvoc_skosxl (2.0.2)
-      bundler
-      iqvoc (~> 4.0.0)
     journey (1.0.4)
     json (1.7.7)
     kaminari (0.14.1)
@@ -158,7 +163,7 @@ DEPENDENCIES
   iqvoc
   iqvoc_inflectionals
   iqvoc_similar_terms
-  iqvoc_skosxl
+  iqvoc_skosxl!
   pg
   pry-debugger
   pry-rails
