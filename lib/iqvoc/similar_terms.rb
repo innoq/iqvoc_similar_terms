@@ -20,7 +20,8 @@ module Iqvoc
     # returns a hash of label/weighting+concepts pairs
     def self.weighted(lang, *terms) # TODO: rename
       concepts = terms_to_concepts(lang, *terms).
-          includes(:labelings => [:owner, :target])
+          includes(:labelings => [:owner, :target]).
+          where("labels.language" => lang) # applies language constraint to results
       return terms.inject({}) do |memo, term|
         concepts.each do |concept|
           concept.labelings.each do |ln|
