@@ -43,6 +43,8 @@ GEM
     debugger-linecache (1.2.0)
     debugger-ruby_core_source (1.2.0)
     erubis (2.7.0)
+    execjs (1.4.0)
+      multi_json (~> 1.0)
     fastercsv (1.5.5)
     hike (1.2.2)
     i18n (0.6.1)
@@ -141,6 +143,9 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.37)
+    uglifier (2.0.1)
+      execjs (>= 0.3.0)
+      multi_json (~> 1.0, >= 1.0.2)
 
 PLATFORMS
   ruby
@@ -153,3 +158,4 @@ DEPENDENCIES
   pry-debugger
   pry-rails
   sqlite3
+  uglifier

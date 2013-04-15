@@ -15,4 +15,5 @@ end
 
 group :staging do
   gem 'pg'
+  gem 'uglifier'
 end
