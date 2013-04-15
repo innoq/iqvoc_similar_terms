@@ -13,3 +13,8 @@ group :development, :test do
     gem 'sqlite3'
   end
 end
+
+group :staging do
+  gem 'pg'
+  gem 'uglifier'
+end
