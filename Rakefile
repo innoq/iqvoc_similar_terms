@@ -9,3 +9,13 @@ Iqvoc::SimilarTerms::Application.load_tasks
 
 require 'bundler'
 Bundler::GemHelper.install_tasks
+
+desc "Build gem"
+task :build do |t|
+  `rm *.gem; gem build *.gemspec`
+end
+
+desc "Release gem"
+task :release => :build do |t|
+  `gem push *.gem`
+end
