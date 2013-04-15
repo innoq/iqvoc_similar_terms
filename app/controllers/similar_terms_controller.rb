@@ -18,6 +18,7 @@ class SimilarTermsController < ApplicationController
     @results = Iqvoc::SimilarTerms.ranked(lang, *@terms)
 
     respond_to do |format|
+      format.html
       format.ttl
       format.rdf
     end

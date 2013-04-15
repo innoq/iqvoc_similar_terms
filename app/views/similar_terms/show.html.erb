@@ -1,0 +1,17 @@
+<%= page_header :title => "Similar Terms" %> <%# TODO: i18n %>
+<%= render "concepts/sidebars/plural" %>
+
+<ol>
+  <% @results.each do |data|
+    label = data[0]
+    concepts = data[1..-1]
+  %>
+    <li>
+      <%= label.value %>
+      (<%= concepts.map do |concept|
+        origin = concept.origin
+        link_to origin, rdf_url(origin, :format => nil, :lang => nil)
+      end.join(", ").html_safe %>)
+    </li>
+  <% end %>
+</ol>
