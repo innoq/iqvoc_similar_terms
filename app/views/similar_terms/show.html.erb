@@ -1,5 +1,14 @@
 <%= page_header :title => "Similar Terms" %> <%# TODO: i18n %>
 
+<% if @terms %>
+  <%= sidebar do %>
+    <%= sidebar_header t('txt.common.representations') %>
+    <%= sidebar_item :icon => 'share', :text => 'HTML', :path => similar_path(:terms => params[:terms], :format => :html) %>
+    <%= sidebar_item :icon => 'share', :text => 'RDF/XML', :path => similar_path(:terms => params[:terms], :format => :rdf) %>
+    <%= sidebar_item :icon => 'share', :text => 'RDF/XML', :path => similar_path(:terms => params[:terms], :format => :ttl) %>
+  <% end %>
+<% end %>
+
 <%= form_tag(similar_path, :method => :get, :class => 'form-horizontal') do %>
   <%= text_field_tag :terms, (@terms ?
           Iqvoc::InlineDataHelper.generate_inline_values(@terms) :
