@@ -78,7 +78,7 @@ GEM
       iqvoc (~> 4.0.0)
       iqvoc_skosxl (~> 2.0.0)
       rails (~> 3.2.1)
-    iqvoc_similar_terms (0.1.0)
+    iqvoc_similar_terms (0.5.1)
       iqvoc (~> 4.0.0)
       rails (~> 3.2.1)
     journey (1.0.4)
