@@ -8,7 +8,7 @@ class SimilarTermsController < ApplicationController
     authorize! :read, Iqvoc::Concept.base_class
 
     unless params[:terms]
-      head 400
+      head 400 unless request.format.html? # non-GUI
       return
     end
 

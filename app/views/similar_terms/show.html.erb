@@ -1,8 +1,14 @@
 <%= page_header :title => "Similar Terms" %> <%# TODO: i18n %>
-<%= render "concepts/sidebars/plural" %>
+
+<%= form_tag(similar_path, :method => :get, :class => 'form-horizontal') do %>
+  <%= text_field_tag :terms, (@terms ?
+          Iqvoc::InlineDataHelper.generate_inline_values(@terms) :
+          params[:terms]) %>
+  <%= submit_tag t('txt.views.search_results.submit'), :class => 'btn btn-primary' %>
+<% end %>
 
 <ol>
-  <% @results.each do |data|
+  <% (@results || []).each do |data|
     label = data[0]
     concepts = data[1..-1]
   %>
