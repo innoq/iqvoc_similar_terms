@@ -143,8 +143,6 @@ GEM
       polyglot (>= 0.3.1)
     tzinfo (0.3.37)
     unicode-display_width (0.1.1)
-    zeus (0.13.3)
-      method_source (>= 0.6.7)
 
 PLATFORMS
   ruby
@@ -159,4 +157,3 @@ DEPENDENCIES
   pry-rails
   rails (~> 3.2.1)
   sqlite3
-  zeus
