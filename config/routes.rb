@@ -5,5 +5,5 @@ Iqvoc.localized_routes << lambda do |routing|
 end
 
 Rails.application.routes.draw do
-  # see configuration (initializer)
+  # see above
 end
