@@ -83,6 +83,7 @@ GEM
     mime-types (1.22)
     minitest (4.7.1)
     multi_json (1.7.2)
+    mysql2 (0.3.11)
     parallel (0.6.4)
     polyglot (0.3.3)
     pry (0.9.12)
@@ -152,6 +153,7 @@ DEPENDENCIES
   hirb-unicode
   iqvoc (~> 4.0.9)
   minitest
+  mysql2
   pry
   pry-debugger
   pry-rails

@@ -1,0 +1,11 @@
+development:
+  adapter: sqlite3
+  database: db/iqvoc_similar_terms_development.sqlite3
+
+test:
+  adapter: sqlite3
+  database: db/iqvoc_similar_terms_test.sqlite3
+
+production:
+  adapter: sqlite3
+  database: db/iqvoc_similar_terms_production.sqlite3

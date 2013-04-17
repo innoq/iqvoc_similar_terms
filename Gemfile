@@ -6,6 +6,7 @@ gem 'iqvoc', '~> 4.0.9'
 group :development, :test do
 
   platforms :ruby do
+    gem 'mysql2'
     gem 'sqlite3'
 
     gem 'pry'
