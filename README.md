@@ -21,3 +21,5 @@ In addition to regular SKOS, Similar Terms supports
 [SKOS-XL](https://github.com/innoq/iqvoc_skosxl) and
 [Inflectionals](https://github.com/innoq/iqvoc_inflectionals) - the latter
 provides case-insensitive lookups.
+
+See the respective branches for application templates using those extensions.
