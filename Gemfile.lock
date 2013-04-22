@@ -45,7 +45,6 @@ GEM
     debugger-linecache (1.2.0)
     debugger-ruby_core_source (1.2.0)
     erubis (2.7.0)
-    fastercsv (1.5.5)
     hike (1.2.2)
     hirb (0.7.1)
     hirb-unicode (0.0.5)
@@ -57,11 +56,10 @@ GEM
       builder
       bundler
     iq_triplestorage (0.2.2)
-    iqvoc (4.0.9)
+    iqvoc (4.1.0)
       authlogic
       bundler
       cancan
-      fastercsv
       iq_rdf (~> 0.1.2)
       iq_triplestorage
       json
@@ -151,11 +149,11 @@ PLATFORMS
 DEPENDENCIES
   cane
   hirb-unicode
-  iqvoc (~> 4.0.9)
+  iqvoc (~> 4.1.0)
   minitest
   mysql2
   pry
   pry-debugger
   pry-rails
-  rails (~> 3.2.1)
+  rails (~> 3.2.13)
   sqlite3

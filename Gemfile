@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.2.1'
-gem 'iqvoc', '~> 4.0.9'
+gem 'rails', '~> 3.2.13'
+gem 'iqvoc', '~> 4.1.0'
 
 group :development, :test do
 
