@@ -39,26 +39,34 @@ class SimilarTermsTest < ActionController::TestCase
     get :show, :lang => "en", :format => "ttl", :terms => "forest"
     assert_response :success
     assert @response.body.include?(<<-EOS)
+@prefix sdc: <http://sindice.com/vocab/search#>.
+    EOS
+    assert @response.body.include?(<<-EOS)
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
     EOS
     assert @response.body.include?(<<-EOS)
 @prefix query: <http://test.host/en/similar.ttl?terms=forest#>.
     EOS
-    assert @response.body.include?(<<-EOS.strip)
-query:top skos:altLabel "forest"@en, "woods"@en.
-    EOS
-
-    get :show, :lang => "en", :format => "ttl", :terms => "forest,automobile"
-    assert_response :success
     assert @response.body.include?(<<-EOS)
-@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+query:top a sdc:Query;
     EOS
     assert @response.body.include?(<<-EOS)
-@prefix query: <http://test.host/en/similar.ttl?terms=forest%2Cautomobile#>.
+query:result1 a sdc:Result;
+              rdfs:label "forest"@en;
+              sdc:rank 1;
+              sdc:link :forest.
     EOS
-    assert @response.body.include?(<<-EOS.strip)
-query:top skos:altLabel "automobile"@en, "car"@en, "forest"@en, "woods"@en.
+    assert @response.body.include?(<<-EOS)
+query:result2 a sdc:Result;
+              rdfs:label "woods"@en;
+              sdc:rank 2;
+              sdc:link :forest.
     EOS
+    assert @response.body.include?(<<-EOS)
+:forest a skos:Concept.
+    EOS
+    # ensure there are no duplicates
+    assert_equal 2, @response.body.split("a skos:Concept").length
   end
 
 end

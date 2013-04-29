@@ -1,0 +1,41 @@
+Iqvoc.default_rdf_namespace_helper_methods.each do |meth|
+  document.namespaces(self.send(meth))
+end
+
+subject = url_for(request.query_parameters.
+    merge(:only_path => false, :anchor => ""))
+
+document.namespaces(:sdc => "http://sindice.com/vocab/search#",
+    :query => subject)
+
+document << IqRdf::Query.build_uri("top",
+    IqRdf::Sdc::build_uri("Query")) do |query|
+  query.Sdc::totalResults(@results.length)
+  query.Sdc::itemsPerPage(@results.length) # XXX: preliminary
+  query.Sdc::searchTerms(@terms)
+
+  skos = IqRdf::Namespace.find_namespace_class("skos")
+  processed_concepts = {} # XXX: crutch
+  @results.each_with_index do |data, i|
+    i += 1
+
+    # XXX: data structure smell
+    label = data[0]
+    concepts = data[1..-1]
+
+    result = "result#{i}"
+    query.Sdc::result(IqRdf::Query::build_uri(result))
+    document << IqRdf::Query::build_uri(result,
+        IqRdf::Sdc::build_uri("Result")) do |sbj|
+      sbj.Rdfs::label(label.value, :lang => label.language)
+      sbj.Sdc::rank(i)
+      concepts.each do |concept|
+        sbj.Sdc::link(IqRdf.build_uri(concept.origin))
+        unless processed_concepts[concept.origin]
+          document << IqRdf.build_uri(concept.origin, skos.build_uri("Concept"))
+          processed_concepts[concept.origin] = true
+        end
+      end
+    end
+  end
+end

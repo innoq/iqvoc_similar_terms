@@ -1,7 +1,7 @@
 module Iqvoc
   module SimilarTerms # TODO: make language constraints optional
 
-    WEIGHTINGS = { # XXX: hard-coded - should be read from configuration -- XXX: unused/deprecated
+    WEIGHTINGS = { # XXX: hard-coded - should be read from configuration
       "Labeling::SKOS::PrefLabel"     => 5,
       "Labeling::SKOS::AltLabel"      => 2,
       "Labeling::SKOS::HiddenLabel"   => 1,
@@ -11,13 +11,13 @@ module Iqvoc
       "Labeling::SKOSXL::HiddenLabel" => 1
     }
 
-    # returns an array of label/concepts pairs, sorted descendingly by weighting -- XXX: unused/deprecated
+    # returns an array of label/concepts pairs, sorted descendingly by weighting
     def self.ranked(lang, *terms) # TODO: rename
       weighted(lang, *terms).sort_by { |label, data| data[0] }.reverse.
           map { |label, data| [label] + data[1..-1] } # drop weighting
     end
 
-    # returns a hash of label/weighting+concepts pairs -- XXX: unused/deprecated
+    # returns a hash of label/weighting+concepts pairs
     def self.weighted(lang, *terms) # TODO: rename
       concepts = terms_to_concepts(lang, *terms).
           includes(:labelings => [:owner, :target]).
@@ -40,16 +40,6 @@ module Iqvoc
         end
         memo
       end
-    end
-
-    # returns a list of labels, sorted alphabetically
-    def self.alphabetical(lang, *terms)
-      concepts = terms_to_concepts(lang, *terms).
-          includes(:labelings => [:owner, :target]).
-          where("labels.language" => lang) # applies language constraint to results
-      return concepts.map do |concept|
-        concept.labelings.map { |ln| ln.target }
-      end.flatten.sort_by { |label| label.value }
     end
 
     def self.terms_to_concepts(lang, *terms)
