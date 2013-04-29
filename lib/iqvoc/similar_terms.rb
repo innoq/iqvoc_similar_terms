@@ -42,6 +42,16 @@ module Iqvoc
       end
     end
 
+    # returns a list of labels, sorted alphabetically
+    def self.alphabetical(lang, *terms)
+      concepts = terms_to_concepts(lang, *terms).
+          includes(:labelings => [:owner, :target]).
+          where("labels.language" => lang) # applies language constraint to results
+      return concepts.map do |concept|
+        concept.labelings.map { |ln| ln.target }
+      end.flatten.sort_by { |label| label.value }
+    end
+
     def self.terms_to_concepts(lang, *terms)
       concept_ids = terms_to_labels(lang, *terms).includes(:labelings).
           map { |label| label.labelings.map(&:owner_id) }.flatten.uniq
