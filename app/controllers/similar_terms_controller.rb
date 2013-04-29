@@ -15,14 +15,12 @@ class SimilarTermsController < ApplicationController
     @terms = Iqvoc::InlineDataHelper.parse_inline_values(params[:terms])
     lang = params[:lang]
 
+    @results = Iqvoc::SimilarTerms.ranked(lang, *@terms)
 
     respond_to do |format|
-      format.any(:html, :ttl, :rdf) do
-        @results = Iqvoc::SimilarTerms.ranked(lang, *@terms)
-      end
-      format.text do
-        render :text => Iqvoc::SimilarTerms.alphabetical(lang, *@terms).join("\n")
-      end
+      format.html
+      format.ttl
+      format.rdf
     end
   end
 

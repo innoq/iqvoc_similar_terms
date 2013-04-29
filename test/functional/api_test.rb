@@ -111,22 +111,4 @@ query:result4 a sdc:Result;
     EOS
   end
 
-  test "plain text representation" do
-    get :show, :lang => "en", :format => "text", :terms => "car"
-    assert_response :success
-    assert_equal @response.body, <<-EOS.strip
-automobile
-car
-    EOS
-
-    get :show, :lang => "en", :format => "text", :terms => "forest,automobile"
-    assert_response :success
-    assert_equal @response.body, <<-EOS.strip
-automobile
-car
-forest
-woods
-    EOS
-  end
-
 end
