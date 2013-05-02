@@ -1,7 +1,7 @@
 # encoding: UTF-8
 
 require File.join(File.expand_path(File.dirname(__FILE__)), '../test_helper')
-require 'iqvoc/rdfapi' # XXX: only required with Zeus
+require 'iqvoc/rdfapi'
 
 class SimilarTermsTest < ActionController::TestCase
 

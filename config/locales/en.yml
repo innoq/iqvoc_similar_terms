@@ -1,0 +1,6 @@
+en:
+  txt:
+    views:
+      similar_terms:
+        title: Similar Terms
+        results_heading: similar terms for '%{terms}'
