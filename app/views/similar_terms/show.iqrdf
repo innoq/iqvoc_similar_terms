@@ -1,0 +1,19 @@
+Iqvoc.default_rdf_namespace_helper_methods.each do |meth|
+  document.namespaces(self.send(meth))
+end
+
+subject = url_for(request.query_parameters.
+    merge(:only_path => false, :anchor => ""))
+
+document.namespaces(:query => subject)
+
+#document << IqRdf::query do |query|
+#  @results.each do |label|
+#    query::Skos.altLabel(label.value, :lang => label.language)
+#  end
+#end
+document << IqRdf::Query.top do |t|
+  @results.each do |label|
+    t.Skos.altLabel(label.value, :lang => label.language)
+  end
+end if @results.length > 0

@@ -32,7 +32,7 @@ class SimilarTermsTest < ActionController::TestCase
 
     get :show, :lang => "en", :format => "ttl", :terms => "foo"
     assert_response 200
-    assert !@response.body.include?("a sdc:Result")
+    assert !@response.body.include?("skos:altLabel")
   end
 
   test "RDF representations" do
@@ -45,7 +45,8 @@ class SimilarTermsTest < ActionController::TestCase
 @prefix query: <http://test.host/en/similar.ttl?terms=forest#>.
     EOS
     assert @response.body.include?(<<-EOS.strip)
-query:top skos:altLabel "forest"@en, "woods"@en.
+query:top skos:altLabel "forest"@en;
+          skos:altLabel "woods"@en.
     EOS
 
     get :show, :lang => "en", :format => "ttl", :terms => "forest,automobile"
@@ -57,7 +58,10 @@ query:top skos:altLabel "forest"@en, "woods"@en.
 @prefix query: <http://test.host/en/similar.ttl?terms=forest%2Cautomobile#>.
     EOS
     assert @response.body.include?(<<-EOS.strip)
-query:top skos:altLabel "automobile"@en, "car"@en, "forest"@en, "woods"@en.
+query:top skos:altLabel "automobile"@en;
+          skos:altLabel "car"@en;
+          skos:altLabel "forest"@en;
+          skos:altLabel "woods"@en.
     EOS
   end
 
