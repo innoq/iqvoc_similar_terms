@@ -1,6 +1,9 @@
 Iqvoc.config.register_setting("title", "iQvoc Similar Terms")
 
-Iqvoc.navigation_items.insert(-6, { # in front of search, users, configuration, help and about
-  :content => proc { link_to t("txt.views.similar_terms.title"), similar_path },
-  :controller => "similar_terms"
-})
+ActiveSupport.on_load :navigation_services_group_created do
+  Iqvoc.navigation_items[-3][:items] << {
+    :text  => proc { t("txt.views.similar_terms.title") },
+    :href  => proc { similar_path },
+    :controller => "similar_terms"
+  }
+end
