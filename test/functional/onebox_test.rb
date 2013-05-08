@@ -22,6 +22,7 @@ class OneBoxTest < ActionController::TestCase
   test "XML representation" do
     get :show, :lang => "en", :format => "xml", :terms => "foo"
     assert_response 200
+    puts "\n\nAAA", "=" * 80, @response.body, "-" * 80
     assert @response.body.starts_with?(<<-EOS.strip)
 <?xml version="1.0" encoding="UTF-8"?>
 <OneBoxResults xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -34,6 +35,7 @@ class OneBoxTest < ActionController::TestCase
 
     get :show, :lang => "en", :format => "xml", :terms => "forest"
     assert_response 200
+    puts "\n\nBBB", "=" * 80, @response.body, "-" * 80
     assert @response.body.include?("<totalResults>2</totalResults>")
     assert @response.body.include?(<<-EOS.strip)
   <MODULE_RESULT>
