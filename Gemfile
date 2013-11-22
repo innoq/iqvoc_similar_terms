@@ -1,7 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.2.13'
-gem 'iqvoc', '~> 4.1.3'
+gem 'iqvoc', '~> 4.1.3', :github => 'innoq/iqvoc'
 
 group :development, :test do
 
@@ -11,12 +10,11 @@ group :development, :test do
 
     gem 'pry'
     gem 'pry-rails'
-    gem 'pry-debugger'
     gem 'hirb-unicode'
     gem 'cane'
   end
 end
 
 group :test do
-  gem 'minitest'
+  gem 'turn'
 end
