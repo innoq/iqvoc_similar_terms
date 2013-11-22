@@ -1,4 +1,3 @@
-require 'debug'
 require 'iqvoc/environments/development'
 
 if Iqvoc::SimilarTerms.const_defined?(:Application)
