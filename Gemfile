@@ -1,9 +1,8 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
 gem 'iqvoc', '~> 4.1.3', :github => 'innoq/iqvoc'
 
 group :development, :test do
-
   platforms :ruby do
     gem 'mysql2'
     gem 'sqlite3'
