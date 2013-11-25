@@ -28,7 +28,7 @@ class OneBoxTest < ActionController::TestCase
   <resultCode>success</resultCode>
   <totalResults>0</totalResults>
   <urlText>Similar Terms</urlText>
-  <urlLink>http://test.host/en/similar.xml?terms=foo#</urlLink>
+  <urlLink>http://test.host/de/similar.xml?terms=foo#</urlLink>
     EOS
     assert !@response.body.include?("<MODULE_RESULT>")
 
