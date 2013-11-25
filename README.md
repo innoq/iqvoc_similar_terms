@@ -11,7 +11,7 @@ Getting Started
 
 2. Generate secret token:
 
-        $ rake iqvoc:setup:generate_secret_token
+        $ bundle exec rake iqvoc:setup:generate_secret_token
 
 
 Extensions
