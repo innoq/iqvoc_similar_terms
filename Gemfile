@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'iqvoc', '~> 4.2.0', :github => 'innoq/iqvoc'
+gem 'iqvoc', '~> 4.3.0', :github => 'innoq/iqvoc'
 
 group :development, :test do
   platforms :ruby do

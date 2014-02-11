@@ -1,5 +1,5 @@
 module Iqvoc
   module SimilarTerms
-    VERSION = "0.9.0"
+    VERSION = "2.3.0"
   end
 end
