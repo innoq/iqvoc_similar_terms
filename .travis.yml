@@ -1,18 +1,27 @@
 rvm:
-  - 1.9.3
-  - 2.0.0
-
+- 1.9.3
+- 2.0
+- 2.1
+- jruby-19mode
 env:
-  - DB=sqlite
-  - DB=mysql
-
-script: "./script/ci/travis-build"
-before_script: "./script/ci/travis-before-build"
-
+- DB=sqlite
+- DB=mysql
+before_install: cp config/database.yml.$DB config/database.yml
+before_script:
+- bundle exec rake db:drop RAILS_ENV=test
+- bundle exec rake db:create RAILS_ENV=test
+- bundle exec rake db:migrate RAILS_ENV=test
 branches:
   only:
-    - master
-
+  - master
 notifications:
-  recipients:
-    - iqvoc@innoq.com
+  email:
+  - iqvoc@innoq.com
+deploy:
+  provider: rubygems
+  api_key:
+    secure: gaKVohEtHR8ZVVTirZIJNr64gkFq9jS89OziQYddAvHMmg4LCfY3PFLLt9GPbOal6OBx/NWx8nPWXoaEoCpxKtusTVv4GPygrE1RXILXY4A1YDHk1p+NYp5IDyCMQrwJzP05qS+LWcEJFM0zJChFXiHqflVhTKTLSyIk+bc+QZc=
+  gem: iqvoc_similar_terms
+  on:
+    tags: true
+    repo: innoq/iqvoc_similar_terms
