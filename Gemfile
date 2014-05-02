@@ -4,13 +4,12 @@ gem 'iqvoc', '~> 4.4.0', :github => 'innoq/iqvoc'
 
 group :development, :test do
   gem 'spring'
+  gem 'pry'
+  gem 'pry-rails'
 
   platforms :ruby do
     gem 'mysql2'
     gem 'sqlite3'
-
-    gem 'pry'
-    gem 'pry-rails'
     gem 'hirb-unicode'
     gem 'cane'
   end
