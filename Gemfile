@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 gem 'iqvoc', '~> 4.4.0', :github => 'innoq/iqvoc'
 
 group :development, :test do
+  gem 'spring'
+
   platforms :ruby do
     gem 'mysql2'
     gem 'sqlite3'
@@ -12,8 +14,8 @@ group :development, :test do
     gem 'hirb-unicode'
     gem 'cane'
   end
-end
-
-group :test do
-  gem 'turn'
+  platforms :jruby do
+    gem 'activerecord-jdbcsqlite3-adapter'
+    gem 'activerecord-jdbcmysql-adapter'
+  end
 end
