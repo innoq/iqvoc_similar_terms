@@ -13,7 +13,6 @@ module Iqvoc
 
     # returns an array of label/concepts pairs, sorted descendingly by weighting -- XXX: unused/deprecated
     def self.ranked(lang, *terms) # TODO: rename
-      binding.pry
       weighted(lang, *terms).
           sort_by { |label, data| label }.
           sort_by { |label, data| data[0] }.
