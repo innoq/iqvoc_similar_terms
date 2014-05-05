@@ -1,5 +1,6 @@
-Similar Terms for iQvoc
+[![Build Status](https://travis-ci.org/innoq/iqvoc_similar_terms.svg?branch=master)](https://travis-ci.org/innoq/iqvoc_similar_terms)
 
+Similar terms for iQvoc
 
 Getting Started
 ===============
@@ -8,11 +9,6 @@ Getting Started
 
         $ bundle exec rake db:create
         $ bundle exec rake db:migrate iqvoc:db:seed_all
-
-2. Generate secret token:
-
-        $ bundle exec rake iqvoc:setup:generate_secret_token
-
 
 Extensions
 ==========
