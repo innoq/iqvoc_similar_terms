@@ -31,7 +31,7 @@ class SimilarTermsController < ApplicationController
       return
     end
 
-    @terms = Iqvoc::InlineDataHelper.parse_inline_values(params[:terms])
+    @terms = InlineDataHelper.parse_inline_values(params[:terms])
     lang = params[:lang]
 
     respond_to do |format|

@@ -1,10 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'iqvoc', '~> 4.6.0', :github => 'innoq/iqvoc'
+gem 'iqvoc', '~> 4.8.0', :github => 'innoq/iqvoc'
 
 group :development, :test do
-  gem 'spring'
-  gem 'pry'
   gem 'pry-rails'
 
   platforms :ruby do

@@ -1,21 +1,20 @@
 # encoding: UTF-8
 
 require File.join(File.expand_path(File.dirname(__FILE__)), '../test_helper')
-require 'iqvoc/rdfapi'
 
 class SimilarTermsTest < ActionController::TestCase
 
   setup do
     @controller = SimilarTermsController.new
 
-    forest = Iqvoc::RDFAPI.devour("forest", "a", "skos:Concept") # FIXME: should be ":forest", but https://github.com/innoq/iqvoc/issues/195
-    Iqvoc::RDFAPI.devour(forest, "skos:prefLabel", '"forest"@en')
-    Iqvoc::RDFAPI.devour(forest, "skos:altLabel", '"woods"@en')
+    forest = RDFAPI.devour("forest", "a", "skos:Concept") # FIXME: should be ":forest", but https://github.com/innoq/iqvoc/issues/195
+    RDFAPI.devour(forest, "skos:prefLabel", '"forest"@en')
+    RDFAPI.devour(forest, "skos:altLabel", '"woods"@en')
     forest.save
 
-    car = Iqvoc::RDFAPI.devour("car", "a", "skos:Concept") # FIXME: should be ":car"; see above
-    Iqvoc::RDFAPI.devour(car, "skos:prefLabel", '"car"@en')
-    Iqvoc::RDFAPI.devour(car, "skos:altLabel", '"automobile"@en')
+    car = RDFAPI.devour("car", "a", "skos:Concept") # FIXME: should be ":car"; see above
+    RDFAPI.devour(car, "skos:prefLabel", '"car"@en')
+    RDFAPI.devour(car, "skos:altLabel", '"automobile"@en')
     car.save
   end
 

@@ -1,24 +1,23 @@
 # encoding: UTF-8
 
 require File.join(File.expand_path(File.dirname(__FILE__)), '../test_helper')
-require 'iqvoc/rdfapi' # XXX: only required with Zeus
 require 'iqvoc/similar_terms' # XXX: should not be necessary!?
 
 class EntityResolutionTest < ActiveSupport::TestCase
 
   setup do
-    forest = Iqvoc::RDFAPI.devour(":forest", "a", "skos:Concept")
-    Iqvoc::RDFAPI.devour(forest, "skos:prefLabel", '"forest"@en')
-    Iqvoc::RDFAPI.devour(forest, "skos:altLabel", '"woods"@en')
-    forest.save
+    forest = RDFAPI.devour("forest", "a", "skos:Concept")
+    RDFAPI.devour(forest, "skos:prefLabel", '"forest"@en')
+    RDFAPI.devour(forest, "skos:altLabel", '"woods"@en')
+    forest.save!
   end
 
   test "concept resolution" do
-    concepts = Iqvoc::SimilarTerms.terms_to_concepts("en","forest")
+    concepts = Iqvoc::SimilarTerms.terms_to_concepts("en", "forest")
     assert_equal 1, concepts.length
     assert_equal Iqvoc::Concept.base_class, concepts[0].class
 
-    concepts = Iqvoc::SimilarTerms.terms_to_concepts("de","forest")
+    concepts = Iqvoc::SimilarTerms.terms_to_concepts("de", "forest")
     assert_equal 0, concepts.count
 
     concepts = Iqvoc::SimilarTerms.terms_to_concepts("en", "foo")
@@ -29,6 +28,7 @@ class EntityResolutionTest < ActiveSupport::TestCase
     labels = Iqvoc::SimilarTerms.terms_to_labels("en", "forest")
     # assert_equal ActiveRecord::Relation, labels.class
     labels = labels.all
+
     assert_equal 1, labels.length
     assert_equal Iqvoc::Label.base_class, labels[0].class
     assert_equal "forest", labels[0].value

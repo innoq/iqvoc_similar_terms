@@ -11,7 +11,7 @@
 
 <%= bootstrap_form_tag(:url => similar_path, :method => :get, :layout => :inline) do |f| %>
   <%= f.text_field :terms, :hide_label => true, :value => (@terms ?
-          Iqvoc::InlineDataHelper.generate_inline_values(@terms) :
+          InlineDataHelper.generate_inline_values(@terms) :
           params[:terms]) %>
   <%= f.submit t('txt.views.search_results.submit'), :class => 'btn btn-primary' %>
 <% end %>
