@@ -72,7 +72,7 @@ module Iqvoc
         label_ids = Inflectional::Base.select([:label_id]).
             where(:normal_hash => reduce.call(hashes)).map(&:label_id)
         return Iqvoc::XLLabel.base_class.where(:language => lang,
-            :id => reduce.call(label_ids).to_a.flatten)
+            :id => reduce.call(label_ids))
       elsif Iqvoc.const_defined?(:XLLabel)
         return Iqvoc::XLLabel.base_class.where(:language => lang,
             :value => reduce.call(terms))
