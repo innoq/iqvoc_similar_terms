@@ -38,6 +38,14 @@ module Iqvoc
             memo[label][0] += weight
             # associated concepts
             memo[label] << concept
+            concept.narrower_relations.map { |nr| nr.target.pref_label }.each do |pref_label|
+              memo[pref_label] ||= []
+              memo[pref_label][0] = 0
+              # associated concepts
+              memo[pref_label] << concept
+              memo[pref_label].uniq!
+              #binding.pry
+            end
             memo[label].uniq! # XXX: inefficient!? can't easily use Set here though
           end
         end
