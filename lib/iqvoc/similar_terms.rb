@@ -46,7 +46,13 @@ module Iqvoc
               memo[pref_label].uniq!
               #binding.pry
             end
-            memo[label].uniq! # XXX: inefficient!? can't easily use Set here though
+        end
+        if memo.empty?
+          label = Iqvoc::XLLabel.base_class.find_by(value: term)
+          label.compound_in.each do |compound_in|
+            memo[compound_in] ||= []
+            memo[compound_in][0] ||= 0
+            memo[compound_in][0] += 0
           end
         end
         memo
