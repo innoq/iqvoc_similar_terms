@@ -37,15 +37,15 @@ module Iqvoc
             memo[label][0] ||= 0
             memo[label][0] += weight
             # associated concepts
-            memo[label] << concept
+            memo[label] << concept unless memo[label].include? concept
             concept.narrower_relations.map { |nr| nr.target.pref_label }.each do |pref_label|
               memo[pref_label] ||= []
-              memo[pref_label][0] = 0
+              memo[pref_label][0] ||= 0
+              memo[pref_label][0] += 0
               # associated concepts
-              memo[pref_label] << concept
-              memo[pref_label].uniq!
-              #binding.pry
+              memo[pref_label] << concept unless memo[pref_label].include? concept
             end
+          end
         end
         if memo.empty?
           label = Iqvoc::XLLabel.base_class.find_by(value: term)
