@@ -81,4 +81,10 @@ class ResultsTest < ActiveSupport::TestCase
     assert_equal "Real Water", results.keys.fourth.value
     assert_equal 2, results[results.keys.fourth][0]
   end
+
+  test "no results" do
+    results = Iqvoc::SimilarTerms.weighted("de", "Water")
+    assert_equal 0, results.length
+  end
+
 end
