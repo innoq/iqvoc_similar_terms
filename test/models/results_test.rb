@@ -14,6 +14,25 @@ class ResultsTest < ActiveSupport::TestCase
     RDFAPI.devour(car, "skos:prefLabel", '"car"@en')
     RDFAPI.devour(car, "skos:altLabel", '"automobile"@en')
     car.save
+
+    water = Concept::SKOS::Base.new(top_term: true).tap do |c|
+      RDFAPI.devour c, 'skos:prefLabel', '"Water"@en'
+      RDFAPI.devour c, 'skos:altLabel', '"Real Water"@en'
+      c.save
+    end
+
+    Concept::SKOS::Base.new.tap do |c|
+      RDFAPI.devour c, 'skos:prefLabel', '"Used Water"@en'
+      RDFAPI.devour c, 'skos:altLabel', '"No Water"@en'
+      RDFAPI.devour c, 'skos:broader', water
+      c.save
+    end
+
+    Concept::SKOS::Base.new.tap do |c|
+      RDFAPI.devour c, 'skos:prefLabel', '"New Water"@en'
+      RDFAPI.devour c, 'skos:broader', water
+      c.save
+    end
   end
 
   test "ranked results" do
@@ -50,4 +69,16 @@ class ResultsTest < ActiveSupport::TestCase
     end
   end
 
+  test "inclusion of pref labels of sub concepts" do
+    results = Iqvoc::SimilarTerms.weighted("en", "Water")
+    assert_equal 4, results.length
+    assert_equal "Water", results.keys.first.value
+    assert_equal 5, results[results.keys.first][0]
+    assert_equal "Used Water", results.keys.second.value
+    assert_equal 0, results[results.keys.second][0]
+    assert_equal "New Water", results.keys.third.value
+    assert_equal 0, results[results.keys.third][0]
+    assert_equal "Real Water", results.keys.fourth.value
+    assert_equal 2, results[results.keys.fourth][0]
+  end
 end
