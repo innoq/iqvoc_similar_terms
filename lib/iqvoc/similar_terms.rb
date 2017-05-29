@@ -47,8 +47,8 @@ module Iqvoc
             end
           end
         end
-        if memo.empty?
-          label = Iqvoc::XLLabel.base_class.find_by(value: term)
+        label = Iqvoc::XLLabel.base_class.find_by(value: term)
+        if memo.empty? && label.present?
           label.compound_in.each do |compound_in|
             memo[compound_in] ||= []
             memo[compound_in][0] ||= 0
