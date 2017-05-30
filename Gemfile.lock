@@ -1,6 +1,7 @@
 GIT
   remote: git://github.com/innoq/iqvoc.git
   revision: 0b0a87123de77cc94dbf0049c0270f5948651a44
+  branch: master
   specs:
     iqvoc (4.11.1)
       apipie-rails (~> 0.3.5)
@@ -28,6 +29,23 @@ GIT
       rails_autolink
       sass-rails (~> 5.0.0)
       uglifier (>= 1.3.0)
+
+GIT
+  remote: https://github.com/innoq/iqvoc_compound_forms
+  revision: 8e54a591b0d45f4958231e6f09ff542aeddf0083
+  branch: master
+  specs:
+    iqvoc_compound_forms (2.9.0)
+      iqvoc (~> 4.11, >= 4.5.0)
+      iqvoc_skosxl (~> 2.9.0)
+
+GIT
+  remote: https://github.com/innoq/iqvoc_skosxl
+  revision: fa309a7bca4ba1400a4a36dc763c538b4bd4cf1a
+  branch: master
+  specs:
+    iqvoc_skosxl (2.9.0)
+      iqvoc (~> 4.11.0)
 
 GEM
   remote: https://rubygems.org/
@@ -103,10 +121,10 @@ GEM
     concurrent-ruby (1.0.5)
     concurrent-ruby (1.0.5-java)
     database_cleaner (1.6.1)
-    delayed_job (4.1.2)
-      activesupport (>= 3.0, < 5.1)
-    delayed_job_active_record (4.1.1)
-      activerecord (>= 3.0, < 5.1)
+    delayed_job (4.1.3)
+      activesupport (>= 3.0, < 5.2)
+    delayed_job_active_record (4.1.2)
+      activerecord (>= 3.0, < 5.2)
       delayed_job (>= 3.0, < 5)
     ebnf (0.3.9)
       rdf (~> 1.1)
@@ -351,9 +369,11 @@ DEPENDENCIES
   cane
   hirb-unicode
   iqvoc (~> 4.11.1)!
+  iqvoc_compound_forms (~> 2.9.0)!
+  iqvoc_skosxl (~> 2.9.0)!
   mysql2
   pry-rails
   sqlite3
 
 BUNDLED WITH
-   1.14.5
+   1.15.0

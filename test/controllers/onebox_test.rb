@@ -7,14 +7,18 @@ class OneBoxTest < ActionController::TestCase
   setup do
     @controller = SimilarTermsController.new
 
-    forest = RDFAPI.devour("forest", "a", "skos:Concept") # FIXME: should be ":forest", but https://github.com/innoq/iqvoc/issues/195
-    RDFAPI.devour(forest, "skos:prefLabel", '"forest"@en')
-    RDFAPI.devour(forest, "skos:altLabel", '"woods"@en')
+    forest_label = Iqvoc::XLLabel.base_class.create(value: 'forest', language: 'en')
+    wood_label = Iqvoc::XLLabel.base_class.create(value: 'woods', language: 'en')
+    forest = Iqvoc::Concept.base_class.create(origin: 'forest')
+    forest.pref_labels << forest_label
+    forest.alt_labels << wood_label
     forest.save
 
-    car = RDFAPI.devour("car", "a", "skos:Concept") # FIXME: should be ":car"; see above
-    RDFAPI.devour(car, "skos:prefLabel", '"car"@en')
-    RDFAPI.devour(car, "skos:altLabel", '"automobile"@en')
+    car_label = Iqvoc::XLLabel.base_class.create(value: 'car', language: 'en')
+    auto_label = Iqvoc::XLLabel.base_class.create(value: 'automobile', language: 'en')
+    car = Iqvoc::Concept.base_class.create(origin: 'car')
+    car.pref_labels << car_label
+    car.alt_labels << auto_label
     car.save
   end
 
