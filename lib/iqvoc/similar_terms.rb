@@ -47,12 +47,16 @@ module Iqvoc
             end
           end
         end
-        label = Iqvoc::XLLabel.base_class.find_by(value: term)
-        if memo.empty? && label.present?
-          label.compound_in.each do |compound_in|
-            memo[compound_in] ||= []
-            memo[compound_in][0] ||= 0
-            memo[compound_in][0] += 0
+
+        # evaluate only if iqvoc_compound_forms engine is loaded
+        if Iqvoc.const_defined?(:CompoundForms)
+          label = Iqvoc::XLLabel.base_class.find_by(value: term)
+          if memo.empty? && label.present?
+            label.compound_in.each do |compound_in|
+              memo[compound_in] ||= []
+              memo[compound_in][0] ||= 0
+              memo[compound_in][0] += 0
+            end
           end
         end
         memo
