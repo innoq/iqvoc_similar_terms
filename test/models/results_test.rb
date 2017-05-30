@@ -5,6 +5,10 @@ require File.join(File.expand_path(File.dirname(__FILE__)), '../test_helper')
 class ResultsTest < ActiveSupport::TestCase
 
   setup do
+    @compounds = {
+      "Weltraumkampfpilot" => %w(Weltraum Kampf Pilot)
+    }
+
     forest_label = Iqvoc::XLLabel.base_class.create(value: 'forest', language: 'en')
     wood_label = Iqvoc::XLLabel.base_class.create(value: 'woods', language: 'en')
     forest = Iqvoc::Concept.base_class.create(origin: 'forest')
@@ -96,6 +100,14 @@ class ResultsTest < ActiveSupport::TestCase
   test "no results" do
     results = Iqvoc::SimilarTerms.weighted("de", "water")
     assert_equal 0, results.length
+  end
+
+  test "compound returns" do
+    create_compound_form_label(@compounds)
+    results = Iqvoc::SimilarTerms.weighted("de", "Kampf")
+    assert_equal 1, results.length
+    assert_equal "Weltraumkampfpilot", results.keys.first.value
+    assert_equal 0, results[results.keys.first][0]
   end
 
 end
