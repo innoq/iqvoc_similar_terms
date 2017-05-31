@@ -45,9 +45,6 @@ class ResultsTest < ActiveSupport::TestCase
     new_water.save
 
     RDFAPI.devour new_water, 'skos:broader', water
-
-    water.narrower_relations.first.target_id = used_water.id
-    water.narrower_relations.second.target_id = new_water.id
   end
 
   test "ranked results" do
