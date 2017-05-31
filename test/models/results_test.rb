@@ -5,46 +5,8 @@ require File.join(File.expand_path(File.dirname(__FILE__)), '../test_helper')
 class ResultsTest < ActiveSupport::TestCase
 
   setup do
-    @compounds = {
-      "Weltraumkampfpilot" => %w(Weltraum Kampf Pilot)
-    }
-
-    forest_label = Iqvoc::XLLabel.base_class.create(value: 'forest', language: 'en')
-    wood_label = Iqvoc::XLLabel.base_class.create(value: 'woods', language: 'en')
-    forest = Iqvoc::Concept.base_class.create(origin: 'forest')
-    forest.pref_labels << forest_label
-    forest.alt_labels << wood_label
-    forest.save
-
-    car_label = Iqvoc::XLLabel.base_class.create(value: 'car', language: 'en')
-    auto_label = Iqvoc::XLLabel.base_class.create(value: 'automobile', language: 'en')
-    car = Iqvoc::Concept.base_class.create(origin: 'car')
-    car.pref_labels << car_label
-    car.alt_labels << auto_label
-    car.save
-
-    water_label = Iqvoc::XLLabel.base_class.create(value: 'water', language: 'en')
-    real_water_label = Iqvoc::XLLabel.base_class.create(value: 'real water', language: 'en')
-    water = Iqvoc::Concept.base_class.create(origin: 'water', top_term: true)
-    water.pref_labels << water_label
-    water.alt_labels << real_water_label
-    water.save
-
-    used_water_label = Iqvoc::XLLabel.base_class.create(value: 'used water', language: 'en')
-    no_water_label = Iqvoc::XLLabel.base_class.create(value: 'no water', language: 'en')
-    used_water = Iqvoc::Concept.base_class.create
-    used_water.pref_labels << used_water_label
-    used_water.alt_labels << no_water_label
-    used_water.save
-
-    RDFAPI.devour used_water, 'skos:broader', water
-
-    new_water_label = Iqvoc::XLLabel.base_class.create(value: 'new water', language: 'en')
-    new_water = Iqvoc::Concept.base_class.create
-    new_water.pref_labels << new_water_label
-    new_water.save
-
-    RDFAPI.devour new_water, 'skos:broader', water
+    load_test_data
+    SkosImporter.new('test/concept_test.nt', 'http://localhost:3000/').run
   end
 
   test "ranked results" do
@@ -100,10 +62,10 @@ class ResultsTest < ActiveSupport::TestCase
   end
 
   test "compound returns" do
-    create_compound_form_label(@compounds)
-    results = Iqvoc::SimilarTerms.weighted("de", "Kampf")
+    SkosImporter.new('test/compound_forms.nt', 'http://hobbies.com/').run
+    results = Iqvoc::SimilarTerms.weighted("de", "Computer")
     assert_equal 1, results.length
-    assert_equal "Weltraumkampfpilot", results.keys.first.value
+    assert_equal "Computer programming", results.keys.first.value
     assert_equal 0, results[results.keys.first][0]
   end
 

@@ -1,0 +1,19 @@
+@prefix : <http://localhost:3000/>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#>.
+
+:forest_label a skosxl:Label;
+  skosxl:literalForm "forest"@en.
+:woods_label a skosxl:Label;
+  skosxl:literalForm "woods"@en.
+:forest a skos:Concept;
+  skosxl:prefLabel :forest_label;
+  skosxl:altLabel :woods_label.
+
+:car_label a skosxl:Label;
+  skosxl:literalForm "car"@en.
+:auto_label a skosxl:Label;
+  skosxl:literalForm "automobile"@en.
+:car a skos:Concept;
+  skosxl:prefLabel :car_label;
+  skosxl:altLabel :auto_label.
