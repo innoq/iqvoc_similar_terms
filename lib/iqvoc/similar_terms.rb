@@ -59,7 +59,6 @@ module Iqvoc
               compound_in.concepts.each do |concept|
                 memo[compound_in] << concept unless memo[compound_in].include? concept
               end
-              #binding.pry
             end
           end
         end
