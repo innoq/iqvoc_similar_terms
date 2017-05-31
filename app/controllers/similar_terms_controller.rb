@@ -1,7 +1,5 @@
 # encoding: UTF-8
 
-require 'iqvoc/similar_terms' # XXX: should not be necessary!?
-
 class SimilarTermsController < ApplicationController
   resource_description do
     name 'Similar concepts'
