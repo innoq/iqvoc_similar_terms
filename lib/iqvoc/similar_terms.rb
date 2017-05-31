@@ -43,7 +43,9 @@ module Iqvoc
               memo[pref_label][0] ||= 0
               memo[pref_label][0] += 0
               # associated concepts
-              memo[pref_label] << concept unless memo[pref_label].include? concept
+              pref_label.concepts.each do |c|
+                memo[pref_label] << c unless memo[pref_label].include? c
+              end
             end
           end
         end
