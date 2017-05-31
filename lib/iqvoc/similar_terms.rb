@@ -56,6 +56,10 @@ module Iqvoc
               memo[compound_in] ||= []
               memo[compound_in][0] ||= 0
               memo[compound_in][0] += 0
+              compound_in.concepts.each do |concept|
+                memo[compound_in] << concept unless memo[compound_in].include? concept
+              end
+              #binding.pry
             end
           end
         end
