@@ -5,12 +5,7 @@ require File.join(File.expand_path(File.dirname(__FILE__)), '../test_helper')
 class EntityResolutionTest < ActiveSupport::TestCase
 
   setup do
-    forest_label = Iqvoc::XLLabel.base_class.create(value: 'forest', language: 'en')
-    wood_label = Iqvoc::XLLabel.base_class.create(value: 'woods', language: 'en')
-    forest = Iqvoc::Concept.base_class.create(origin: 'forest')
-    forest.pref_labels << forest_label
-    forest.alt_labels << wood_label
-    forest.save
+    load_test_data
   end
 
   test "concept resolution" do

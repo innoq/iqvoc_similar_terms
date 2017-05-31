@@ -6,20 +6,8 @@ class SimilarTermsTest < ActionController::TestCase
 
   setup do
     @controller = SimilarTermsController.new
-
-    forest_label = Iqvoc::XLLabel.base_class.create(value: 'forest', language: 'en')
-    wood_label = Iqvoc::XLLabel.base_class.create(value: 'woods', language: 'en')
-    forest = Iqvoc::Concept.base_class.create(origin: 'forest')
-    forest.pref_labels << forest_label
-    forest.alt_labels << wood_label
-    forest.save
-
-    car_label = Iqvoc::XLLabel.base_class.create(value: 'car', language: 'en')
-    auto_label = Iqvoc::XLLabel.base_class.create(value: 'automobile', language: 'en')
-    car = Iqvoc::Concept.base_class.create(origin: 'car')
-    car.pref_labels << car_label
-    car.alt_labels << auto_label
-    car.save
+    
+    load_test_data
   end
 
   test "routing" do
