@@ -1,7 +1,6 @@
 # encoding: UTF-8
 
 require File.join(File.expand_path(File.dirname(__FILE__)), '../test_helper')
-require 'iqvoc/similar_terms' # XXX: should not be necessary!?
 
 class EntityResolutionTest < ActiveSupport::TestCase
 
