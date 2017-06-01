@@ -26,7 +26,7 @@ module Iqvoc
           includes(:labelings => [:owner, :target]).
           where("labels.language" => lang) # applies language constraint to results
       return terms.inject({}) do |memo, term|
-        concepts.each do |concept|
+        concepts.published.each do |concept|
           concept.labelings.each do |ln|
             concept = ln.owner
             label = ln.target
@@ -38,12 +38,12 @@ module Iqvoc
             memo[label][0] += weight
             # associated concepts
             memo[label] << concept unless memo[label].include? concept
-            concept.narrower_relations.map { |nr| nr.target.pref_label }.each do |pref_label|
+            concept.narrower_relations.published.map { |nr| nr.target.pref_label }.each do |pref_label|
               memo[pref_label] ||= []
               memo[pref_label][0] ||= 0
               memo[pref_label][0] += 0
               # associated concepts
-              pref_label.concepts.each do |c|
+              pref_label.concepts.published.each do |c|
                 memo[pref_label] << c unless memo[pref_label].include? c
               end
             end
@@ -58,7 +58,7 @@ module Iqvoc
               memo[compound_in] ||= []
               memo[compound_in][0] ||= 0
               memo[compound_in][0] += 0
-              compound_in.concepts.each do |concept|
+              compound_in.concepts.published.each do |concept|
                 memo[compound_in] << concept unless memo[compound_in].include? concept
               end
             end
