@@ -71,7 +71,7 @@ class ResultsTest < ActiveSupport::TestCase
 
   test "nothing unpublished" do
     concept = Iqvoc::XLLabel.base_class.where(value: "forest").first.concepts.first
-    concept.update_attributes published_at: 'NULL'
+    concept.update_attributes published_at: nil
     results = Iqvoc::SimilarTerms.weighted("en", "forest")
     assert_equal 0, results.length
   end
