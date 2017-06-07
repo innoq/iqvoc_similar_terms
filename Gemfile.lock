@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/innoq/iqvoc.git
-  revision: 0b0a87123de77cc94dbf0049c0270f5948651a44
+  revision: 26d0162c8231fb55041bd107ff7add065a628ee9
   branch: master
   specs:
     iqvoc (4.11.1)
@@ -20,7 +20,7 @@ GIT
       iq_rdf (>= 0.1.15)
       iq_triplestorage
       json
-      kaminari
+      kaminari (~> 0.16.3)
       kaminari-bootstrap (~> 3.0.1)
       linkeddata (~> 1.1.2)
       maruku
@@ -32,7 +32,7 @@ GIT
 
 GIT
   remote: https://github.com/innoq/iqvoc_compound_forms
-  revision: 8e54a591b0d45f4958231e6f09ff542aeddf0083
+  revision: 2161d37468b1aaf67020a50f10e692e9a61267a1
   branch: master
   specs:
     iqvoc_compound_forms (2.9.0)
@@ -41,7 +41,7 @@ GIT
 
 GIT
   remote: https://github.com/innoq/iqvoc_skosxl
-  revision: fa309a7bca4ba1400a4a36dc763c538b4bd4cf1a
+  revision: b930a21b262b55625283275c2804f82b014d29d5
   branch: master
   specs:
     iqvoc_skosxl (2.9.0)
@@ -153,7 +153,7 @@ GEM
       hirb (~> 0.5)
       unicode-display_width (~> 0.1.1)
     htmlentities (4.3.4)
-    i18n (0.8.1)
+    i18n (0.8.4)
     iq_rdf (0.1.15)
       activesupport
       builder
@@ -166,21 +166,12 @@ GEM
     json-ld (1.1.11.1)
       multi_json (~> 1.11)
       rdf (~> 1.1, >= 1.1.17, < 1.99)
-    kaminari (1.0.1)
-      activesupport (>= 4.1.0)
-      kaminari-actionview (= 1.0.1)
-      kaminari-activerecord (= 1.0.1)
-      kaminari-core (= 1.0.1)
-    kaminari-actionview (1.0.1)
-      actionview
-      kaminari-core (= 1.0.1)
-    kaminari-activerecord (1.0.1)
-      activerecord
-      kaminari-core (= 1.0.1)
+    kaminari (0.16.3)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     kaminari-bootstrap (3.0.1)
       kaminari (>= 0.13.0)
       rails
-    kaminari-core (1.0.1)
     link_header (0.0.8)
     linkeddata (1.1.11.2)
       equivalent-xml (~> 0.5)
