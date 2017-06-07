@@ -1,0 +1,20 @@
+<http://localhost:3000/water_label> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2008/05/skos-xl#Label> .
+<http://localhost:3000/water_label> <http://www.w3.org/2008/05/skos-xl#literalForm> "water"@en .
+<http://localhost:3000/real_water_label> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2008/05/skos-xl#Label> .
+<http://localhost:3000/real_water_label> <http://www.w3.org/2008/05/skos-xl#literalForm> "real water"@en .
+<http://localhost:3000/water> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://localhost:3000/water> <http://www.w3.org/2008/05/skos-xl#prefLabel> <http://localhost:3000/water_label> .
+<http://localhost:3000/water> <http://www.w3.org/2008/05/skos-xl#altLabel> <http://localhost:3000/real_water_label> .
+<http://localhost:3000/used_water_label> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2008/05/skos-xl#Label> .
+<http://localhost:3000/used_water_label> <http://www.w3.org/2008/05/skos-xl#literalForm> "used water"@en .
+<http://localhost:3000/no_water_label> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2008/05/skos-xl#Label> .
+<http://localhost:3000/no_water_label> <http://www.w3.org/2008/05/skos-xl#literalForm> "no water"@en .
+<http://localhost:3000/used_water> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://localhost:3000/used_water> <http://www.w3.org/2008/05/skos-xl#prefLabel> <http://localhost:3000/used_water_label> .
+<http://localhost:3000/used_water> <http://www.w3.org/2008/05/skos-xl#altLabel> <http://localhost:3000/no_water_label> .
+<http://localhost:3000/used_water> <http://www.w3.org/2004/02/skos/core#broader> <http://localhost:3000/water> .
+<http://localhost:3000/new_water_label> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2008/05/skos-xl#Label> .
+<http://localhost:3000/new_water_label> <http://www.w3.org/2008/05/skos-xl#literalForm> "new water"@en .
+<http://localhost:3000/new_water> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://localhost:3000/new_water> <http://www.w3.org/2008/05/skos-xl#prefLabel> <http://localhost:3000/new_water_label> .
+<http://localhost:3000/new_water> <http://www.w3.org/2004/02/skos/core#broader> <http://localhost:3000/water> .

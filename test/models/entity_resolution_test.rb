@@ -1,15 +1,11 @@
 # encoding: UTF-8
 
 require File.join(File.expand_path(File.dirname(__FILE__)), '../test_helper')
-require 'iqvoc/similar_terms' # XXX: should not be necessary!?
 
 class EntityResolutionTest < ActiveSupport::TestCase
 
   setup do
-    forest = RDFAPI.devour("forest", "a", "skos:Concept")
-    RDFAPI.devour(forest, "skos:prefLabel", '"forest"@en')
-    RDFAPI.devour(forest, "skos:altLabel", '"woods"@en')
-    forest.save!
+    load_test_data
   end
 
   test "concept resolution" do
@@ -30,7 +26,7 @@ class EntityResolutionTest < ActiveSupport::TestCase
     labels = labels.all
 
     assert_equal 1, labels.length
-    assert_equal Iqvoc::Label.base_class, labels[0].class
+    assert_equal Iqvoc::XLLabel.base_class, labels[0].class
     assert_equal "forest", labels[0].value
     assert_equal "en", labels[0].language
 

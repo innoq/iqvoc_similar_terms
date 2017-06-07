@@ -1,0 +1,26 @@
+@prefix : <http://localhost:3000/>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#>.
+
+:water_label a skosxl:Label;
+  skosxl:literalForm "water"@en.
+:real_water_label a skosxl:Label;
+  skosxl:literalForm "real water"@en.
+:water a skos:Concept;
+  skosxl:prefLabel :water_label;
+  skosxl:altLabel :real_water_label.
+
+:used_water_label a skosxl:Label;
+  skosxl:literalForm "used water"@en.
+:no_water_label a skosxl:Label;
+  skosxl:literalForm "no water"@en.
+:used_water a skos:Concept;
+  skosxl:prefLabel :used_water_label;
+  skosxl:altLabel :no_water_label;
+  skos:broader :water.
+
+:new_water_label a skosxl:Label;
+  skosxl:literalForm "new water"@en.
+:new_water a skos:Concept;
+  skosxl:prefLabel :new_water_label;
+  skos:broader :water.

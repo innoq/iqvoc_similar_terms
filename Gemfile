@@ -16,3 +16,8 @@ group :development, :test do
     gem 'activerecord-jdbcmysql-adapter'
   end
 end
+
+group :test do
+  gem 'iqvoc_skosxl', '~> 2.9.0', git: 'https://github.com/innoq/iqvoc_skosxl', branch: 'master'
+  gem 'iqvoc_compound_forms', '~> 2.9.0', git: 'https://github.com/innoq/iqvoc_compound_forms', branch: 'master'
+end

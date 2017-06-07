@@ -7,15 +7,7 @@ class OneBoxTest < ActionController::TestCase
   setup do
     @controller = SimilarTermsController.new
 
-    forest = RDFAPI.devour("forest", "a", "skos:Concept") # FIXME: should be ":forest", but https://github.com/innoq/iqvoc/issues/195
-    RDFAPI.devour(forest, "skos:prefLabel", '"forest"@en')
-    RDFAPI.devour(forest, "skos:altLabel", '"woods"@en')
-    forest.save
-
-    car = RDFAPI.devour("car", "a", "skos:Concept") # FIXME: should be ":car"; see above
-    RDFAPI.devour(car, "skos:prefLabel", '"car"@en')
-    RDFAPI.devour(car, "skos:altLabel", '"automobile"@en')
-    car.save
+    load_test_data
   end
 
   test "XML representation" do
