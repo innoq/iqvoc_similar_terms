@@ -52,7 +52,16 @@ module Iqvoc
 
         # evaluate only if iqvoc_compound_forms engine is loaded
         if Iqvoc.const_defined?(:CompoundForms)
-          label = Iqvoc::XLLabel.base_class.find_by(value: term)
+          label = if Iqvoc.const_defined?(:Inflectionals)
+            hash = Inflectional::Base.normalize(term)
+            label_id = Inflectional::Base.select([:label_id]).
+                where(:normal_hash => hash).map(&:label_id).first
+            Iqvoc::XLLabel.base_class.where(:language => lang,
+                :id => label_id).first
+          else
+            Iqvoc::XLLabel.base_class.find_by(value: term)
+          end
+
           if memo.empty? && label.present?
             label.compound_in.each do |compound_in|
               memo[compound_in] ||= []
@@ -81,7 +90,15 @@ module Iqvoc
 
       if Iqvoc.const_defined?(:CompoundForms) && labels.empty?
         terms.each do |term|
-          label = Iqvoc::XLLabel.base_class.find_by(value: term)
+          label = if Iqvoc.const_defined?(:Inflectionals)
+            hash = Inflectional::Base.normalize(term)
+            label_id = Inflectional::Base.select([:label_id]).
+                where(:normal_hash => hash).map(&:label_id).first
+            Iqvoc::XLLabel.base_class.where(:language => lang,
+                :id => label_id).first
+          else
+            Iqvoc::XLLabel.base_class.find_by(value: term)
+          end
           labels << label.compound_in.map { |ci| ci } if label.present?
         end
       end
