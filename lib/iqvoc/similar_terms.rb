@@ -81,9 +81,7 @@ module Iqvoc
       if Iqvoc.const_defined?(:CompoundForms) && labels.empty?
         terms.each do |term|
           label = Iqvoc::XLLabel.base_class.find_by(value: term)
-          if label.present?
-            labels << label.compound_in.map { |ci| ci }
-          end
+          labels << label.compound_in.map { |ci| ci } if label.present?
         end
       end
 
