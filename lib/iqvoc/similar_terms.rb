@@ -73,9 +73,11 @@ module Iqvoc
       concepts = terms_to_concepts(lang, *terms).
           includes(:labelings => [:owner, :target]).
           where("labels.language" => lang) # applies language constraint to results
-      return concepts.map do |concept|
+      labels = concepts.published.map do |concept|
         concept.labelings.map { |ln| ln.target }
-      end.flatten.sort_by { |label| label.value }
+        concept.narrower_relations.published.map { |nr| nr.target.pref_label }.each { |pl| pl.value }
+      end
+      labels.flatten.sort_by { |label| label.value }
     end
 
     def self.terms_to_concepts(lang, *terms)
