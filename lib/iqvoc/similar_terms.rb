@@ -75,8 +75,18 @@ module Iqvoc
           where("labels.language" => lang) # applies language constraint to results
       labels = concepts.published.map do |concept|
         concept.labelings.map { |ln| ln.target }
-        concept.narrower_relations.published.map { |nr| nr.target.pref_label }.each { |pl| pl.value }
+        concept.narrower_relations.published.map { |nr| nr.target.pref_label }.each { |pl| pl }
       end
+
+      if Iqvoc.const_defined?(:CompoundForms) && labels.empty?
+        terms.each do |term|
+          label = Iqvoc::XLLabel.base_class.find_by(value: term)
+          if label.present?
+            labels << label.compound_in.map { |ci| ci }
+          end
+        end
+      end
+
       labels.flatten.sort_by { |label| label.value }
     end
 
