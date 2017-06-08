@@ -73,9 +73,10 @@ module Iqvoc
       concepts = terms_to_concepts(lang, *terms).
           includes(:labelings => [:owner, :target]).
           where("labels.language" => lang) # applies language constraint to results
-      labels = concepts.published.map do |concept|
-        concept.labelings.map { |ln| ln.target }
-        concept.narrower_relations.published.map { |nr| nr.target.pref_label }.each { |pl| pl }
+      labels = []
+      concepts.published.each do |concept|
+        labels << concept.labelings.map { |ln| ln.target }
+        labels << concept.narrower_relations.published.map { |nr| nr.target.pref_label }.each { |pl| pl }
       end
 
       if Iqvoc.const_defined?(:CompoundForms) && labels.empty?
