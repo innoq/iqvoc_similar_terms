@@ -1,30 +1,32 @@
 module Iqvoc
   module SimilarTerms # TODO: make language constraints optional
 
-    WEIGHTINGS = { # XXX: hard-coded - should be read from configuration -- XXX: unused/deprecated
-      "Labeling::SKOS::PrefLabel"     => 5,
-      "Labeling::SKOS::AltLabel"      => 2,
-      "Labeling::SKOS::HiddenLabel"   => 1,
+    WEIGHTINGS = {
+      # XXX: hard-coded - should be read from configuration -- XXX: unused/deprecated
+      'Labeling::SKOS::PrefLabel'     => 5,
+      'Labeling::SKOS::AltLabel'      => 2,
+      'Labeling::SKOS::HiddenLabel'   => 1,
       # SKOS-XL
-      "Labeling::SKOSXL::PrefLabel"   => 5,
-      "Labeling::SKOSXL::AltLabel"    => 2,
-      "Labeling::SKOSXL::HiddenLabel" => 1
+      'Labeling::SKOSXL::PrefLabel'   => 5,
+      'Labeling::SKOSXL::AltLabel'    => 2,
+      'Labeling::SKOSXL::HiddenLabel' => 1
     }
 
     # returns an array of label/concepts pairs, sorted descendingly by weighting -- XXX: unused/deprecated
-    def self.ranked(lang, *terms) # TODO: rename
-      weighted(lang, *terms).
-          sort_by { |label, data| label }.
-          sort_by { |label, data| data[0] }.
-          reverse.
-          map { |label, data| [label] + data[1..-1] } # drop weighting
+    # TODO: rename
+    def self.ranked(lang, *terms)
+      weighted(lang, *terms).sort_by { |label, _data| label }
+                            .sort_by { |_label, data| data[0] }
+                            .reverse
+                            .map { |label, data| [label] + data[1..-1] } # drop weighting
     end
 
     # returns a hash of label/weighting+concepts pairs -- XXX: unused/deprecated
     def self.weighted(lang, *terms) # TODO: rename
-      concepts = terms_to_concepts(lang, *terms).
-          includes(:labelings => [:owner, :target]).
-          where("labels.language" => lang) # applies language constraint to results
+      concepts = terms_to_concepts(lang, *terms)
+                 .includes(:labelings => [:owner, :target])
+                 .where('labels.language' => lang) # applies language constraint to results
+
       return terms.inject({}) do |memo, term|
         concepts.published.each do |concept|
           concept.labelings.each do |ln|
@@ -38,6 +40,7 @@ module Iqvoc
             memo[label][0] += weight
             # associated concepts
             memo[label] << concept unless memo[label].include? concept
+
             concept.narrower_relations.published.map { |nr| nr.target.pref_label }.each do |pref_label|
               memo[pref_label] ||= []
               memo[pref_label][0] ||= 0
@@ -52,16 +55,7 @@ module Iqvoc
 
         # evaluate only if iqvoc_compound_forms engine is loaded
         if Iqvoc.const_defined?(:CompoundForms)
-          label = if Iqvoc.const_defined?(:Inflectionals)
-            hash = Inflectional::Base.normalize(term)
-            label_id = Inflectional::Base.select([:label_id]).
-                where(:normal_hash => hash).map(&:label_id).first
-            Iqvoc::XLLabel.base_class.where(:language => lang,
-                :id => label_id).first
-          else
-            Iqvoc::XLLabel.base_class.find_by(value: term)
-          end
-
+          label = Iqvoc::XLLabel.base_class.find_by(value: term)
           if memo.empty? && label.present?
             label.compound_in.each do |compound_in|
               memo[compound_in] ||= []
@@ -79,37 +73,21 @@ module Iqvoc
 
     # returns a list of labels, sorted alphabetically
     def self.alphabetical(lang, *terms)
-      concepts = terms_to_concepts(lang, *terms).
-          includes(:labelings => [:owner, :target]).
-          where("labels.language" => lang) # applies language constraint to results
-      labels = []
-      concepts.published.each do |concept|
-        labels << concept.labelings.map { |ln| ln.target }
-        labels << concept.narrower_relations.published.map { |nr| nr.target.pref_label }.each { |pl| pl }
-      end
+      concepts = terms_to_concepts(lang, *terms)
+                 .includes(:labelings => [:owner, :target])
+                 .where('labels.language' => lang) # applies language constraint to results
 
-      if Iqvoc.const_defined?(:CompoundForms) && labels.empty?
-        terms.each do |term|
-          label = if Iqvoc.const_defined?(:Inflectionals)
-            hash = Inflectional::Base.normalize(term)
-            label_id = Inflectional::Base.select([:label_id]).
-                where(:normal_hash => hash).map(&:label_id).first
-            Iqvoc::XLLabel.base_class.where(:language => lang,
-                :id => label_id).first
-          else
-            Iqvoc::XLLabel.base_class.find_by(value: term)
-          end
-          labels << label.compound_in.map { |ci| ci } if label.present?
-        end
-      end
-
-      labels.flatten.sort_by { |label| label.value }
+      return concepts.map { |concept| concept.labelings.map(&:target) }
+                     .flatten.sort_by(&:value)
     end
 
     def self.terms_to_concepts(lang, *terms)
-      concept_ids = terms_to_labels(lang, *terms).includes(:labelings).
-          map { |label| label.labelings.map(&:owner_id) }.flatten.uniq
-      return Iqvoc::Concept.base_class.where(:id => concept_ids)
+      concept_ids = terms_to_labels(lang, *terms)
+                    .includes(:labelings)
+                    .map { |label| label.labelings.map(&:owner_id) }
+                    .flatten.uniq
+
+      return Iqvoc::Concept.base_class.where(id: concept_ids)
     end
 
     # NB: case-insensitive only when inflectionals are available
@@ -120,16 +98,15 @@ module Iqvoc
       if Iqvoc.const_defined?(:Inflectionals)
         # use normalized form for case-insensitivity (and performance)
         hashes = terms.map { |term| Inflectional::Base.normalize(term) }
-        label_ids = Inflectional::Base.select([:label_id]).
-            where(:normal_hash => reduce.call(hashes)).map(&:label_id)
-        return Iqvoc::XLLabel.base_class.where(:language => lang,
-            :id => reduce.call(label_ids))
+        label_ids = Inflectional::Base.select([:label_id])
+                                      .where(normal_hash: reduce.call(hashes))
+                                      .map(&:label_id)
+
+        return Iqvoc::XLLabel.base_class.where(language: lang, id: reduce.call(label_ids))
       elsif Iqvoc.const_defined?(:XLLabel)
-        return Iqvoc::XLLabel.base_class.where(:language => lang,
-            :value => reduce.call(terms))
+        return Iqvoc::XLLabel.base_class.where(language: lang, value: reduce.call(terms))
       else
-        return Iqvoc::Label.base_class.where(:language => lang,
-            :value => reduce.call(terms))
+        return Iqvoc::Label.base_class.where(language: lang, value: reduce.call(terms))
       end
     end
 
