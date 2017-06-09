@@ -64,7 +64,7 @@ module Iqvoc
 
                     Iqvoc::XLLabel.base_class.where(:language => lang, :id => label_id).first
                   else
-                    Iqvoc::XLLabel.base_class.find_by(value: term)
+                    Iqvoc::XLLabel.base_class.where('LOWER(value) = ?', term.downcase).first
                   end
 
           if memo.empty? && label.present?
@@ -104,7 +104,7 @@ module Iqvoc
 
                     Iqvoc::XLLabel.base_class.where(:language => lang, :id => label_id).first
                   else
-                    Iqvoc::XLLabel.base_class.find_by(value: term)
+                    Iqvoc::XLLabel.base_class.where('LOWER(value) = ?', term.downcase).first
                   end
 
           labels << label.compound_in.map { |ci| ci } if label.present?
