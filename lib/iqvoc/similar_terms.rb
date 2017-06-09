@@ -89,7 +89,7 @@ module Iqvoc
       labels = []
       concepts.published.each do |concept|
         labels << concept.labelings.map { |ln| ln.target }
-        labels << concept.narrower_relations.published.map { |nr| nr.target.pref_label }.each { |pl| pl }
+        labels << concept.narrower_relations.published.map { |nr| nr.target.pref_label }
       end
 
       if Iqvoc.const_defined?(:CompoundForms) && labels.empty?
