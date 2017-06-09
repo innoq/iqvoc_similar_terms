@@ -137,9 +137,13 @@ module Iqvoc
 
         return Iqvoc::XLLabel.base_class.where(language: lang, id: reduce.call(label_ids))
       elsif Iqvoc.const_defined?(:XLLabel)
-        return Iqvoc::XLLabel.base_class.where(language: lang, value: reduce.call(terms))
+        return Iqvoc::XLLabel.base_class
+                             .where(language: lang)
+                             .where('LOWER(value) IN (?)', terms.map(&:downcase))
       else
-        return Iqvoc::Label.base_class.where(language: lang, value: reduce.call(terms))
+        return Iqvoc::Label.base_class
+                           .where(language: lang)
+                           .where('LOWER(value) IN (?)', terms.map(&:downcase))
       end
     end
 
