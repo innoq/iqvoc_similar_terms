@@ -41,10 +41,20 @@ module Iqvoc
             # associated concepts
             memo[label] << concept unless memo[label].include? concept
 
+            concept.concept_relation_skos_relateds.published.map { |nr| nr.target.pref_label }.each do |pref_label|
+              memo[pref_label] ||= []
+              memo[pref_label][0] ||= 0
+              memo[pref_label][0] += 1
+              # associated concepts
+              pref_label.concepts.published.each do |c|
+                memo[pref_label] << c unless memo[pref_label].include? c
+              end
+            end
+
             concept.narrower_relations.published.map { |nr| nr.target.pref_label }.each do |pref_label|
               memo[pref_label] ||= []
               memo[pref_label][0] ||= 0
-              memo[pref_label][0] += 0
+              memo[pref_label][0] += 1
               # associated concepts
               pref_label.concepts.published.each do |c|
                 memo[pref_label] << c unless memo[pref_label].include? c
