@@ -99,11 +99,7 @@ module Iqvoc
                     Iqvoc::XLLabel.base_class.where('LOWER(value) = ?', term.downcase).first
                   end
 
-          if label.present?
-            label.compound_in.each do |ci|
-              results << ci.concepts.map { |c| c.id }
-            end
-          end
+          results << label.compound_in.map { |ci| ci.concepts.map { |c| c.id } } if label.present?
         end
       end
       Iqvoc::Concept.base_class.where(id: results.flatten.uniq)
