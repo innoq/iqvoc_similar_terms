@@ -76,7 +76,7 @@ module Iqvoc
       return Iqvoc::Concept.base_class.published.where(id: concept_ids)
     end
 
-    def self.find_related_and_narrower_concepts concepts, lang, *terms
+    def self.find_related_and_narrower_concepts(concepts, lang, *terms)
       results = []
       concepts.each do |c|
         results << c.narrower_relations.published.map(&:target_id)
