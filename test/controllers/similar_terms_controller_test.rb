@@ -81,25 +81,27 @@ query:top skos:altLabel "automobile"@en;
     assert @response.body.include? '<Field name="woods">woods</Field>'
   end
 
-  test "RDF representation with sub labels" do
+  test "RDF representation with pref labels of narrower and related concepts" do
     SkosImporter.new('test/concept_test.nt', 'http://localhost:3000/').run
     get :show, :lang => "en", :format => "ttl", :terms => "water"
     assert_response :success
     assert @response.body.include?(<<-EOS.strip)
 query:top skos:altLabel "new water"@en;
           skos:altLabel "real water"@en;
+          skos:altLabel "related"@en;
           skos:altLabel "used water"@en;
           skos:altLabel "water"@en.
 EOS
   end
 
-  test "RDF representation with sub labels - case insensitive" do
+  test "RDF representation with pref labels of narrower and related concepts - case insensitive" do
     SkosImporter.new('test/concept_test.nt', 'http://localhost:3000/').run
     get :show, :lang => "en", :format => "ttl", :terms => "Water"
     assert_response :success
     assert @response.body.include?(<<-EOS.strip)
 query:top skos:altLabel "new water"@en;
           skos:altLabel "real water"@en;
+          skos:altLabel "related"@en;
           skos:altLabel "used water"@en;
           skos:altLabel "water"@en.
 EOS

@@ -28,7 +28,7 @@ module Iqvoc
                  .where('labels.language' => lang) # applies language constraint to results
 
       return terms.inject({}) do |memo, term|
-        concepts.published.each do |concept|
+        concepts.each do |concept|
           concept.labelings.each do |ln|
             concept = ln.owner
             label = ln.target
@@ -40,31 +40,53 @@ module Iqvoc
             memo[label][0] += weight
             # associated concepts
             memo[label] << concept unless memo[label].include? concept
-
-            concept.concept_relation_skos_relateds.published.map { |nr| nr.target.pref_label }.each do |pref_label|
-              memo[pref_label] ||= []
-              memo[pref_label][0] ||= 0
-              memo[pref_label][0] += 1
-              # associated concepts
-              pref_label.concepts.published.each do |c|
-                memo[pref_label] << c unless memo[pref_label].include? c
-              end
-            end
-
-            concept.narrower_relations.published.map { |nr| nr.target.pref_label }.each do |pref_label|
-              memo[pref_label] ||= []
-              memo[pref_label][0] ||= 0
-              memo[pref_label][0] += 1
-              # associated concepts
-              pref_label.concepts.published.each do |c|
-                memo[pref_label] << c unless memo[pref_label].include? c
-              end
-            end
           end
         end
 
-        # evaluate only if iqvoc_compound_forms engine is loaded
-        if Iqvoc.const_defined?(:CompoundForms)
+        find_related_and_narrower_concepts(concepts, lang, *terms).each do |c|
+          memo[c.pref_label] ||= []
+          # weighting
+          memo[c.pref_label][0] ||= 0
+          memo[c.pref_label][0] += 1
+          # associated concepts
+          memo[c.pref_label] << c unless memo[c.pref_label].include? c
+        end
+
+        memo
+      end
+    end
+
+    # returns a list of labels, sorted alphabetically
+    def self.alphabetical(lang, *terms)
+      concepts = terms_to_concepts(lang, *terms)
+                 .includes(:labelings => [:owner, :target])
+                 .where('labels.language' => lang) # applies language constraint to results
+
+      results = concepts.map { |c| c.labelings.map { |ln| ln.target } }
+      results << find_related_and_narrower_concepts(concepts, lang, *terms).map { |c| c.pref_labels }
+
+      results.flatten.sort_by { |l| l.value }
+    end
+
+    def self.terms_to_concepts(lang, *terms)
+      concept_ids = terms_to_labels(lang, *terms)
+                    .includes(:labelings)
+                    .map { |label| label.labelings.map(&:owner_id) }.flatten.uniq
+
+      return Iqvoc::Concept.base_class.published.where(id: concept_ids)
+    end
+
+    def self.find_related_and_narrower_concepts concepts, lang, *terms
+      results = []
+      concepts.each do |c|
+        results << c.narrower_relations.published.map(&:target_id)
+        results << c.concept_relation_skos_relateds.published.map(&:target_id)
+      end
+
+      # FIXME!! zu wenig ergebnisse fuer dienst: alt_labels nicht mehr
+      # evaluate only if iqvoc_compound_forms engine is loaded
+      if Iqvoc.const_defined?(:CompoundForms) && results.empty?
+        terms.each do |term|
           label = if Iqvoc.const_defined?(:Inflectionals)
                     hash = Inflectional::Base.normalize(term)
                     label_id = Inflectional::Base.select([:label_id])
@@ -77,60 +99,14 @@ module Iqvoc
                     Iqvoc::XLLabel.base_class.where('LOWER(value) = ?', term.downcase).first
                   end
 
-          if memo.empty? && label.present?
-            label.compound_in.each do |compound_in|
-              memo[compound_in] ||= []
-              memo[compound_in][0] ||= 0
-              memo[compound_in][0] += 0
-              compound_in.concepts.published.each do |concept|
-                memo[compound_in] << concept unless memo[compound_in].include? concept
-              end
+          if label.present?
+            label.compound_in.each do |ci|
+              results << ci.concepts.map { |c| c.id }
             end
           end
         end
-        memo
       end
-    end
-
-    # returns a list of labels, sorted alphabetically
-    def self.alphabetical(lang, *terms)
-      concepts = terms_to_concepts(lang, *terms)
-                 .includes(:labelings => [:owner, :target])
-                 .where('labels.language' => lang) # applies language constraint to results
-
-      labels = []
-      concepts.published.each do |concept|
-        labels << concept.labelings.map { |ln| ln.target }
-        labels << concept.narrower_relations.published.map { |nr| nr.target.pref_label }
-      end
-
-      if Iqvoc.const_defined?(:CompoundForms) && labels.empty?
-        terms.each do |term|
-          label = if Iqvoc.const_defined?(:Inflectionals)
-                    hash = Inflectional::Base.normalize(term)
-                    label_id = Inflectional::Base.select([:label_id])
-                                                 .where(:normal_hash => hash)
-                                                 .map(&:label_id).first
-
-                    Iqvoc::XLLabel.base_class.where(:language => lang, :id => label_id).first
-                  else
-                    Iqvoc::XLLabel.base_class.where('LOWER(value) = ?', term.downcase).first
-                  end
-
-          labels << label.compound_in.map { |ci| ci } if label.present?
-        end
-      end
-
-      labels.flatten.sort_by { |label| label.value }
-    end
-
-    def self.terms_to_concepts(lang, *terms)
-      concept_ids = terms_to_labels(lang, *terms)
-                    .includes(:labelings)
-                    .map { |label| label.labelings.map(&:owner_id) }
-                    .flatten.uniq
-
-      return Iqvoc::Concept.base_class.where(id: concept_ids)
+      Iqvoc::Concept.base_class.where(id: results.flatten.uniq)
     end
 
     # NB: case-insensitive only when inflectionals are available
