@@ -43,17 +43,18 @@ class ResultsTest < ActiveSupport::TestCase
     end
   end
 
+  #TODO: add a related concept relation and also test it
   test "inclusion of pref labels of sub concepts" do
     results = Iqvoc::SimilarTerms.weighted("en", "water")
     assert_equal 4, results.length
     assert_equal "water", results.keys.first.value
     assert_equal 5, results[results.keys.first][0]
-    assert_equal "used water", results.keys.second.value
-    assert_equal 0, results[results.keys.second][0]
-    assert_equal "new water", results.keys.third.value
-    assert_equal 0, results[results.keys.third][0]
-    assert_equal "real water", results.keys.fourth.value
-    assert_equal 2, results[results.keys.fourth][0]
+    assert_equal "real water", results.keys.second.value
+    assert_equal 2, results[results.keys.second][0]
+    assert_equal "used water", results.keys.third.value
+    assert_equal 1, results[results.keys.third][0]
+    assert_equal "new water", results.keys.fourth.value
+    assert_equal 1, results[results.keys.fourth][0]
   end
 
   test "inclusion of pref labels of sub concepts - case insensitive" do
@@ -61,12 +62,12 @@ class ResultsTest < ActiveSupport::TestCase
     assert_equal 4, results.length
     assert_equal "water", results.keys.first.value
     assert_equal 5, results[results.keys.first][0]
-    assert_equal "used water", results.keys.second.value
-    assert_equal 0, results[results.keys.second][0]
-    assert_equal "new water", results.keys.third.value
-    assert_equal 0, results[results.keys.third][0]
-    assert_equal "real water", results.keys.fourth.value
-    assert_equal 2, results[results.keys.fourth][0]
+    assert_equal "real water", results.keys.second.value
+    assert_equal 2, results[results.keys.second][0]
+    assert_equal "used water", results.keys.third.value
+    assert_equal 1, results[results.keys.third][0]
+    assert_equal "new water", results.keys.fourth.value
+    assert_equal 1, results[results.keys.fourth][0]
   end
 
   test "no results" do
