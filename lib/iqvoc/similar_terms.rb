@@ -83,7 +83,6 @@ module Iqvoc
         results << c.concept_relation_skos_relateds.published.map(&:target_id)
       end
 
-      # FIXME!! zu wenig ergebnisse fuer dienst: alt_labels nicht mehr
       # evaluate only if iqvoc_compound_forms engine is loaded
       if Iqvoc.const_defined?(:CompoundForms) && results.empty?
         terms.each do |term|
