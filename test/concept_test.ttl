@@ -2,13 +2,20 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
 @prefix skosxl: <http://www.w3.org/2008/05/skos-xl#>.
 
+
+:related_label a skosxl:Label;
+skosxl:literalForm "related"@en.
+:related a skos:Concept;
+  skosxl:prefLabel :related_label.
+
 :water_label a skosxl:Label;
   skosxl:literalForm "water"@en.
 :real_water_label a skosxl:Label;
   skosxl:literalForm "real water"@en.
 :water a skos:Concept;
   skosxl:prefLabel :water_label;
-  skosxl:altLabel :real_water_label.
+  skosxl:altLabel :real_water_label;
+  skos:related :related.
 
 :used_water_label a skosxl:Label;
   skosxl:literalForm "used water"@en.

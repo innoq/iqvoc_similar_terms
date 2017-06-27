@@ -43,30 +43,35 @@ class ResultsTest < ActiveSupport::TestCase
     end
   end
 
-  test "inclusion of pref labels of sub concepts" do
+  #TODO: add a related concept relation and also test it
+  test "inclusion of pref labels of narrower and related concepts" do
     results = Iqvoc::SimilarTerms.weighted("en", "water")
-    assert_equal 4, results.length
+    assert_equal 5, results.length
     assert_equal "water", results.keys.first.value
     assert_equal 5, results[results.keys.first][0]
-    assert_equal "used water", results.keys.second.value
-    assert_equal 0, results[results.keys.second][0]
-    assert_equal "new water", results.keys.third.value
-    assert_equal 0, results[results.keys.third][0]
-    assert_equal "real water", results.keys.fourth.value
-    assert_equal 2, results[results.keys.fourth][0]
+    assert_equal "real water", results.keys.second.value
+    assert_equal 2, results[results.keys.second][0]
+    assert_equal "related", results.keys.third.value
+    assert_equal 1, results[results.keys.third][0]
+    assert_equal "used water", results.keys.fourth.value
+    assert_equal 1, results[results.keys.fourth][0]
+    assert_equal "new water", results.keys.fifth.value
+    assert_equal 1, results[results.keys.fifth][0]
   end
 
-  test "inclusion of pref labels of sub concepts - case insensitive" do
+  test "inclusion of pref labels of narrower and related concepts - case insensitive" do
     results = Iqvoc::SimilarTerms.weighted("en", "Water")
-    assert_equal 4, results.length
+    assert_equal 5, results.length
     assert_equal "water", results.keys.first.value
     assert_equal 5, results[results.keys.first][0]
-    assert_equal "used water", results.keys.second.value
-    assert_equal 0, results[results.keys.second][0]
-    assert_equal "new water", results.keys.third.value
-    assert_equal 0, results[results.keys.third][0]
-    assert_equal "real water", results.keys.fourth.value
-    assert_equal 2, results[results.keys.fourth][0]
+    assert_equal "real water", results.keys.second.value
+    assert_equal 2, results[results.keys.second][0]
+    assert_equal "related", results.keys.third.value
+    assert_equal 1, results[results.keys.third][0]
+    assert_equal "used water", results.keys.fourth.value
+    assert_equal 1, results[results.keys.fourth][0]
+    assert_equal "new water", results.keys.fifth.value
+    assert_equal 1, results[results.keys.fifth][0]
   end
 
   test "no results" do
@@ -79,7 +84,7 @@ class ResultsTest < ActiveSupport::TestCase
     results = Iqvoc::SimilarTerms.weighted("de", "computer")
     assert_equal 1, results.length
     assert_equal "Computer programming", results.keys.first.value
-    assert_equal 0, results[results.keys.first][0]
+    assert_equal 1, results[results.keys.first][0]
   end
 
   test "compound returns" do
@@ -87,7 +92,7 @@ class ResultsTest < ActiveSupport::TestCase
     results = Iqvoc::SimilarTerms.weighted("de", "Computer")
     assert_equal 1, results.length
     assert_equal "Computer programming", results.keys.first.value
-    assert_equal 0, results[results.keys.first][0]
+    assert_equal 1, results[results.keys.first][0]
   end
 
   test "nothing unpublished" do
