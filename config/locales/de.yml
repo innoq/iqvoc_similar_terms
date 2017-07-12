@@ -2,5 +2,6 @@ de:
   txt:
     views:
       similar_terms:
+        no_results: Keine Ergebnisse
         title: Ähnliche Begriffe
         results_heading: ähnliche Begriffe für '%{terms}'

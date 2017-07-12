@@ -29,4 +29,7 @@
       end.join(", ").html_safe %>)
     </li>
   <% end %>
+  <% if @results && @results.empty? %>
+    <%= t('txt.views.similar_terms.no_results') %>
+  <% end %>
 </ol>
