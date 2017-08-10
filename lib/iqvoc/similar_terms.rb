@@ -1,6 +1,7 @@
 module Iqvoc
   module SimilarTerms # TODO: make language constraints optional
 
+    #FIXME: misses e.g. "Labeling::GN::OfficialName"
     WEIGHTINGS = {
       # XXX: hard-coded - should be read from configuration -- XXX: unused/deprecated
       'Labeling::SKOS::PrefLabel'     => 5,
