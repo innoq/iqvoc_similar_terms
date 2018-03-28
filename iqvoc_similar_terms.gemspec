@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "iqvoc_similar_terms"
 
-  s.add_dependency "iqvoc", ">= 4.4.0", "~> 4.6"
+  s.add_dependency "iqvoc", ">= 4.4.0", "~> 4.12"
 
   s.files = `git ls-files`.split("\n")
   s.test_files = `git ls-files -- {test,spec,features}/*`.split("\n")

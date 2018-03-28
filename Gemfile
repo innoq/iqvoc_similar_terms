@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'iqvoc', '~> 4.11.1', :github => 'innoq/iqvoc', branch: :master
+gem 'iqvoc', '~> 4.12', :github => 'innoq/iqvoc', branch: :master
 
 group :development, :test do
   gem 'pry-rails'
