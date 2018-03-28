@@ -2,10 +2,10 @@ language: ruby
 cache: bundler
 bundler_args: "--without production heroku --retry 3"
 rvm:
-- 2.0
-- 2.1
 - 2.2
 - 2.3
+- 2.4
+- 2.5
 env:
 - DB=sqlite
 - DB=mysql
@@ -18,8 +18,12 @@ branches:
   only:
   - master
 notifications:
-  email:
-  - iqvoc@innoq.com
+  email: true
+  slack:
+    secure: AJfwOqgZhq0V71bCpbicKDMEG6VviaKsDJJ+qP9y8o8kgqnYN1tsTwU+N+C8u40Wc0EOavP/i4uWo3KRcrjU5w8U991TLG+fQ6lcuRaDzFXgIM/tb39xI1s3W+iw4KaYDQatJA4JrXaMAh9sUL3z/DTkX9VKzpvk8bhehHVaY7M=
+    on_success: change
+    on_failure: always
+    on_pull_requests: false
 deploy:
   provider: rubygems
   api_key:
