@@ -1,3 +1,4 @@
+dist: precise
 language: ruby
 cache: bundler
 bundler_args: "--without production heroku --retry 3"
@@ -5,7 +6,6 @@ rvm:
 - 2.2
 - 2.3
 - 2.4
-- 2.5
 env:
 - DB=sqlite
 - DB=mysql
