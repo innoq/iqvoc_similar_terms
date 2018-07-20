@@ -211,7 +211,7 @@ GEM
     minitest (5.11.3)
     multi_json (1.13.1)
     multipart-post (2.0.0)
-    mysql2 (0.4.6)
+    mysql2 (0.4.10)
     net-http-persistent (2.9.4)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
@@ -229,7 +229,7 @@ GEM
     pry-rails (0.3.6)
       pry (>= 0.10.4)
     public_suffix (3.0.2)
-    rack (1.6.9)
+    rack (1.6.10)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.10)
@@ -343,7 +343,7 @@ GEM
       rdf (~> 1.1, < 1.99)
     spoon (0.0.6)
       ffi
-    sprockets (3.7.1)
+    sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
     sprockets-rails (3.2.1)
@@ -374,7 +374,7 @@ DEPENDENCIES
   iqvoc (~> 4.12)!
   iqvoc_compound_forms (~> 2.9.0)!
   iqvoc_skosxl (~> 2.9.0)!
-  mysql2
+  mysql2 (~> 0.4.6)
   pry-rails
   sqlite3
 
