@@ -9,7 +9,7 @@ class SimilarTermsController < ApplicationController
     Returns labels which are semantically (not orthographically) similar,
     as determined by concept relations.
   DOC
-  formats [:html, :ttl, :rdf]
+  formats [:html, :ttl, :rdf, :xml, :json]
   param :terms, String, :required => true, :desc => <<-DOC
     One or more terms (comma-separated, CSV-style) to be processed.
   DOC
