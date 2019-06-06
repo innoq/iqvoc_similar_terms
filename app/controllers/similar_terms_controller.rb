@@ -39,6 +39,14 @@ class SimilarTermsController < ApplicationController
       format.any(:rdf, :ttl, :xml) do
         @results = Iqvoc::SimilarTerms.alphabetical(lang, *@terms)
       end
+      format.json {
+        results = Iqvoc::SimilarTerms.alphabetical(lang, *@terms)
+        render json: {
+          "url": request.original_url,
+          "total_results": results.length,
+          "results": results.map {|c| c.value }
+        }.to_json
+      }
     end
   end
 
