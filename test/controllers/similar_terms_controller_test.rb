@@ -9,16 +9,27 @@ class SimilarTermsControllerTest < ActionController::TestCase
   end
 
   test "routing" do
-    get :show, :lang => "en", :format => "ttl"
+    get :show, params: {
+      lang: 'en',
+      format: 'ttl'
+    }
     assert_response 400
 
-    get :show, :lang => "en", :format => "ttl", :terms => "foo"
+    get :show, params: {
+      lang: 'en',
+      format: 'ttl',
+      terms: 'foo'
+    }
     assert_response 200
     assert !@response.body.include?("skosxl:altLabel")
   end
 
   test "single RDF representation" do
-    get :show, :lang => "en", :format => "ttl", :terms => "forest"
+    get :show, params: {
+      lang: 'en',
+      format: 'ttl',
+      terms: 'forest'
+    }
     assert_response :success
     assert @response.body.include?(<<-EOS)
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
@@ -36,7 +47,11 @@ query:top skos:altLabel "forest"@en;
   end
 
   test "multipe RDF representations" do
-    get :show, :lang => "en", :format => "ttl", :terms => "forest,automobile"
+    get :show, params: {
+      lang: 'en',
+      format: 'ttl',
+      terms: 'forest,automobile'
+    }
     assert_response :success
     assert @response.body.include?(<<-EOS)
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
@@ -56,7 +71,11 @@ query:top skos:altLabel "automobile"@en;
   end
 
   test "XML representation without results" do
-    get :show, :lang => "en", :format => "xml", :terms => "foo"
+    get :show, params: {
+      lang: 'en',
+      format: 'xml',
+      terms: 'foo'
+    }
     assert_response 200
     assert @response.body.starts_with?(<<-EOS.strip)
 <?xml version="1.0" encoding="UTF-8"?>
@@ -70,7 +89,11 @@ query:top skos:altLabel "automobile"@en;
   end
 
   test "XML representation with results" do
-    get :show, :lang => "en", :format => "xml", :terms => "forest"
+    get :show, params: {
+      lang: 'en',
+      format: 'xml',
+      terms: 'forest'
+    }
     assert_response 200
     assert @response.body.include?("<totalResults>2</totalResults>")
     assert @response.body.include?(<<-EOS.strip)
@@ -83,7 +106,11 @@ query:top skos:altLabel "automobile"@en;
 
   test "RDF representation with pref labels of narrower and related concepts" do
     SkosImporter.new('test/concept_test.nt', 'http://localhost:3000/').run
-    get :show, :lang => "en", :format => "ttl", :terms => "water"
+    get :show, params: {
+      lang: 'en',
+      format: 'ttl',
+      terms: 'water'
+    }
     assert_response :success
     assert @response.body.include?(<<-EOS.strip)
 query:top skos:altLabel "new water"@en;
@@ -96,7 +123,11 @@ EOS
 
   test "RDF representation with pref labels of narrower and related concepts - case insensitive" do
     SkosImporter.new('test/concept_test.nt', 'http://localhost:3000/').run
-    get :show, :lang => "en", :format => "ttl", :terms => "Water"
+    get :show, params: {
+      lang: 'en',
+      format: 'ttl',
+      :terms => 'Water'
+    }
     assert_response :success
     assert @response.body.include?(<<-EOS.strip)
 query:top skos:altLabel "new water"@en;
@@ -109,7 +140,11 @@ EOS
 
   test "Compound Forms in RDF representation" do
     SkosImporter.new('test/compound_forms.nt', 'http://hobbies.com/').run
-    get :show, :lang => "en", :format => "ttl", :terms => "Computer"
+    get :show, params: {
+      lang: 'en',
+      format: 'ttl',
+      terms: 'Computer'
+    }
     assert_response :success
     assert @response.body.include?(<<-EOS.strip)
       query:top skos:altLabel "Computer programming"@en.
@@ -118,7 +153,11 @@ EOS
 
   test "Compound Forms in RDF representation - case insensitive" do
     SkosImporter.new('test/compound_forms.nt', 'http://hobbies.com/').run
-    get :show, :lang => "en", :format => "ttl", :terms => "computer"
+    get :show, params: {
+      lang: 'en',
+      format: 'ttl',
+      terms: 'computer'
+    }
     assert_response :success
     assert @response.body.include?(<<-EOS.strip)
       query:top skos:altLabel "Computer programming"@en.
