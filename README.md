@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/innoq/iqvoc_similar_terms.svg?branch=master)](https://travis-ci.org/innoq/iqvoc_similar_terms)
-
 Similar terms for iQvoc
 
 Getting Started
