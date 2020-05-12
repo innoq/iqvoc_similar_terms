@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/innoq/iqvoc.git
-  revision: e11fad02aa8c5ffbc647abcf3706ce8454d690e1
-  branch: rails-v5
+  revision: f7983a87504e33ee6a2eb055e93d28b01329b464
+  branch: master
   specs:
     iqvoc (4.12.2)
       apipie-rails
@@ -36,8 +36,8 @@ GIT
 
 GIT
   remote: https://github.com/innoq/iqvoc_compound_forms
-  revision: de8818e631c2d0b5f3aec844c3d87e43738d4972
-  branch: rails-v5
+  revision: 07c837c7b68c20bb9ddb5830bfc3e90dcce0ecde
+  branch: master
   specs:
     iqvoc_compound_forms (2.9.0)
       iqvoc (~> 4.12, >= 4.5.0)
@@ -45,8 +45,8 @@ GIT
 
 GIT
   remote: https://github.com/innoq/iqvoc_skosxl
-  revision: fc897ec98fb6135c86884877cd155f9acb36b87e
-  branch: rails-v5
+  revision: 1e13ddffaff51062a2adc91267a17514dd813f1a
+  branch: master
   specs:
     iqvoc_skosxl (2.9.2)
       iqvoc (~> 4.12.0, >= 4.4.0)
@@ -135,7 +135,7 @@ GEM
     concurrent-ruby (1.1.6)
     connection_pool (2.2.2)
     crass (1.0.6)
-    database_cleaner (1.8.4)
+    database_cleaner (1.8.5)
     deep_cloneable (3.0.0)
       activerecord (>= 3.1.0, < 7)
     delayed_job (4.1.8)
@@ -182,7 +182,7 @@ GEM
     json (2.3.0)
     json (2.3.0-java)
     json-canonicalization (0.2.0)
-    json-ld (3.1.3)
+    json-ld (3.1.4)
       htmlentities (~> 4.3)
       json-canonicalization (~> 0.2)
       link_header (~> 0.0, >= 0.0.8)
@@ -252,7 +252,7 @@ GEM
       mimemagic (~> 0.3.2)
     maruku (0.7.3)
     method_source (1.0.0)
-    mimemagic (0.3.4)
+    mimemagic (0.3.5)
     mini_magick (4.10.1)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
@@ -280,7 +280,7 @@ GEM
       spoon (~> 0.0)
     pry-rails (0.3.9)
       pry (>= 0.10.4)
-    public_suffix (4.0.4)
+    public_suffix (4.0.5)
     puma (3.12.4)
     puma (3.12.4-java)
     rack (2.2.2)
