@@ -1,4 +1,6 @@
-Similar terms for iQvoc
+# Similar terms for iQvoc
+
+![CI](https://github.com/innoq/iqvoc_similar_terms/workflows/CI/badge.svg)
 
 Getting Started
 ===============
