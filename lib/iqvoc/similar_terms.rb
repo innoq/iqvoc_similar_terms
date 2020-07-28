@@ -1,9 +1,7 @@
 module Iqvoc
   module SimilarTerms # TODO: make language constraints optional
 
-    #FIXME: misses e.g. "Labeling::GN::OfficialName"
-    WEIGHTINGS = {
-      # XXX: hard-coded - should be read from configuration -- XXX: unused/deprecated
+    @@weightings = {
       'Labeling::SKOS::PrefLabel'     => 5,
       'Labeling::SKOS::AltLabel'      => 2,
       'Labeling::SKOS::HiddenLabel'   => 1,
@@ -12,6 +10,12 @@ module Iqvoc
       'Labeling::SKOSXL::AltLabel'    => 2,
       'Labeling::SKOSXL::HiddenLabel' => 1
     }
+
+    def self.register_weighting(klass_str, value)
+      Mutex.new.synchronize do
+        @@weightings[klass_str] = value
+      end
+    end
 
     # returns an array of label/concepts pairs, sorted descendingly by weighting -- XXX: unused/deprecated
     # TODO: rename
@@ -33,7 +37,10 @@ module Iqvoc
           concept.labelings.each do |ln|
             concept = ln.owner
             label = ln.target
-            weight = WEIGHTINGS[ln.class.name]
+            unless @@weightings[ln.class.name]
+              raise "#{ln.class.name} has no registered weighting. Please configure one using Iqvoc::SimilarTerms.register_weighting('MyLabelingClass', 1.0)"
+            end
+            weight = @@weightings[ln.class.name]
 
             memo[label] ||= []
             # weighting
