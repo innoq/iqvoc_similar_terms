@@ -26,20 +26,42 @@ module Iqvoc
                             .map { |label, data| [label] + data[1..-1] } # drop weighting
     end
 
+    # returns a list of labels, sorted alphabetically
+    def self.alphabetical(lang, *terms)
+      concepts = base_query(lang, *terms)
+
+      results = concepts.map { |c| c.labelings.map { |ln| ln.target } }
+      results << find_related_and_narrower_concepts(concepts, lang, *terms).map { |c| c.pref_labels }
+
+      results.flatten.sort_by { |l| l.value }
+    end
+
+    def self.base_query(lang, *terms)
+      # FIXME: move to initializer to run on start/boot. Could be a problem with intializer load
+      # order of host app because further_labeling classes are initialised after this check
+      Iqvoc::Concept.labeling_class_names.each do |klass_name, langs|
+        unless @@weightings.keys.include? klass_name
+          raise "#{klass_name} has no registered weighting. Please configure one using Iqvoc::SimilarTerms.register_weighting('MyLabelingClass', 1.0)"
+        end
+      end
+
+      # use only labelings with weighting > 0
+      used_weightings = @@weightings.select { |klass_name, weight| weight > 0 }.keys
+      terms_to_concepts(lang, *terms)
+        .includes(:labelings => [:owner, :target])
+        .where('labels.language' => lang)
+        .where('labelings.type IN (?)', used_weightings)
+    end
+
     # returns a hash of label/weighting+concepts pairs -- XXX: unused/deprecated
     def self.weighted(lang, *terms) # TODO: rename
-      concepts = terms_to_concepts(lang, *terms)
-                 .includes(:labelings => [:owner, :target])
-                 .where('labels.language' => lang) # applies language constraint to results
+      concepts = base_query(lang, *terms)
 
       return terms.inject({}) do |memo, term|
         concepts.each do |concept|
           concept.labelings.each do |ln|
             concept = ln.owner
             label = ln.target
-            unless @@weightings[ln.class.name]
-              raise "#{ln.class.name} has no registered weighting. Please configure one using Iqvoc::SimilarTerms.register_weighting('MyLabelingClass', 1.0)"
-            end
             weight = @@weightings[ln.class.name]
 
             memo[label] ||= []
@@ -62,18 +84,6 @@ module Iqvoc
 
         memo
       end
-    end
-
-    # returns a list of labels, sorted alphabetically
-    def self.alphabetical(lang, *terms)
-      concepts = terms_to_concepts(lang, *terms)
-                 .includes(:labelings => [:owner, :target])
-                 .where('labels.language' => lang) # applies language constraint to results
-
-      results = concepts.map { |c| c.labelings.map { |ln| ln.target } }
-      results << find_related_and_narrower_concepts(concepts, lang, *terms).map { |c| c.pref_labels }
-
-      results.flatten.sort_by { |l| l.value }
     end
 
     def self.terms_to_concepts(lang, *terms)
