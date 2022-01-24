@@ -7,4 +7,11 @@
 /config/initializers/secret_token.rb
 *.gem
 
+.idea
+
+public/assets
+public/export
+public/uploads
+
 .ruby-version
+node_modules

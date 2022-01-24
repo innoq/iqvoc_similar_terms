@@ -1,9 +1,9 @@
 GIT
   remote: git://github.com/innoq/iqvoc.git
-  revision: 2876c5cec81cdcb0f71edc754d99d1cb00f69ca4
+  revision: f1f580387349e4d0e16fb962e0dc78dcfa4d2b2b
   branch: master
   specs:
-    iqvoc (4.12.2)
+    iqvoc (4.13.0)
       apipie-rails
       authlogic (~> 6.2.0)
       bootsnap (>= 1.1.0)
@@ -20,34 +20,36 @@ GIT
       iq_rdf (>= 0.1.16)
       iq_triplestorage
       json
+      json-canonicalization (~> 0.2.0)
       kaminari (~> 1.2.0)
-      linkeddata
+      linkeddata (~> 3.1.0)
       maruku
-      nokogiri
+      nokogiri (~> 1.12.0)
       puma (< 6.0)
       rack-mini-profiler
       rails (>= 5.2.0, < 6.0)
       rails_autolink
-      rdf-vocab
+      rdf (~> 3.1.0)
+      rdf-vocab (~> 3.1.0)
       scrypt
       uglifier (>= 1.3.0)
 
 GIT
   remote: https://github.com/innoq/iqvoc_compound_forms
-  revision: 07c837c7b68c20bb9ddb5830bfc3e90dcce0ecde
+  revision: 0ab0d424886efe0e3a243a93f8ceca7b0ec503a0
   branch: master
   specs:
-    iqvoc_compound_forms (2.9.0)
+    iqvoc_compound_forms (2.10.0)
       iqvoc (~> 4.12, >= 4.5.0)
-      iqvoc_skosxl (~> 2.9.0)
+      iqvoc_skosxl (~> 2.10.0)
 
 GIT
   remote: https://github.com/innoq/iqvoc_skosxl
-  revision: e877551645e49dd66171288fb1adc46a50b1a5aa
+  revision: 296f095c51205f6769d5fff90693adffd720723e
   branch: master
   specs:
-    iqvoc_skosxl (2.9.2)
-      iqvoc (~> 4.12.0, >= 4.4.0)
+    iqvoc_skosxl (2.10.0)
+      iqvoc (~> 4.13.0, >= 4.4.0)
 
 GEM
   remote: https://rubygems.org/
@@ -95,7 +97,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
-    amazing_print (1.3.0)
+    amazing_print (1.4.0)
     apipie-rails (0.5.19)
       rails (>= 4.1)
     arel (9.0.0)
@@ -111,8 +113,8 @@ GEM
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
     bindex (0.8.1)
-    bootsnap (1.9.1)
-      msgpack (~> 1.0)
+    bootsnap (1.10.2)
+      msgpack (~> 1.2)
     bootstrap_form (4.5.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
@@ -131,12 +133,12 @@ GEM
     connection_pool (2.2.5)
     crass (1.0.6)
     database_cleaner (1.8.5)
-    deep_cloneable (3.1.0)
-      activerecord (>= 3.1.0, < 7)
-    delayed_job (4.1.9)
-      activesupport (>= 3.0, < 6.2)
-    delayed_job_active_record (4.1.6)
-      activerecord (>= 3.0, < 6.2)
+    deep_cloneable (3.2.0)
+      activerecord (>= 3.1.0, < 8)
+    delayed_job (4.1.10)
+      activesupport (>= 3.0, < 8.0)
+    delayed_job_active_record (4.1.7)
+      activerecord (>= 3.0, < 8.0)
       delayed_job (>= 3.0, < 5)
     ebnf (2.2.1)
       amazing_print (~> 1.2)
@@ -155,12 +157,12 @@ GEM
       faraday (>= 0.7.4, < 1.0)
     faucet_pipeline_rails (1.0.1)
       rails (>= 4.2.10)
-    ffi (1.15.4)
-    ffi (1.15.4-java)
+    ffi (1.15.5)
+    ffi (1.15.5-java)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
-    globalid (0.5.2)
+    globalid (1.0.0)
       activesupport (>= 5.0)
     haml (5.2.2)
       temple (>= 0.8.0)
@@ -168,18 +170,18 @@ GEM
     hamster (3.0.0)
       concurrent-ruby (~> 1.0)
     htmlentities (4.3.4)
-    i18n (1.8.10)
+    i18n (1.8.11)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.1)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
-    iq_rdf (0.1.16)
+    iq_rdf (0.1.17)
       activesupport
       builder
       bundler
     iq_triplestorage (0.2.2)
-    json (2.5.1)
-    json (2.5.1-java)
+    json (2.6.1)
+    json (2.6.1-java)
     json-canonicalization (0.2.1)
     json-ld (3.1.10)
       htmlentities (~> 4.3)
@@ -191,18 +193,18 @@ GEM
     json-ld-preloaded (3.1.6)
       json-ld (~> 3.1)
       rdf (~> 3.1)
-    kaminari (1.2.1)
+    kaminari (1.2.2)
       activesupport (>= 4.1.0)
-      kaminari-actionview (= 1.2.1)
-      kaminari-activerecord (= 1.2.1)
-      kaminari-core (= 1.2.1)
-    kaminari-actionview (1.2.1)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
       actionview
-      kaminari-core (= 1.2.1)
-    kaminari-activerecord (1.2.1)
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
       activerecord
-      kaminari-core (= 1.2.1)
-    kaminari-core (1.2.1)
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
     ld-patch (3.1.3)
       ebnf (~> 2.1)
       rdf (~> 3.1)
@@ -210,18 +212,17 @@ GEM
       sparql (~> 3.1)
       sxp (~> 1.1)
     link_header (0.0.8)
-    linkeddata (3.1.5)
+    linkeddata (3.1.6)
       equivalent-xml (~> 0.6)
-      json-ld (~> 3.1, >= 3.1.9)
-      json-ld-preloaded (~> 3.1, >= 3.1.5)
+      json-ld (~> 3.1, >= 3.1.10)
+      json-ld-preloaded (~> 3.1, >= 3.1.6)
       ld-patch (~> 3.1, >= 3.1.3)
-      nokogiri (~> 1.10)
-      nokogumbo (~> 2.0)
-      rdf (~> 3.1, >= 3.1.13)
+      nokogiri (~> 1.12)
+      rdf (~> 3.1, >= 3.1.15)
       rdf-aggregate-repo (~> 3.1)
       rdf-isomorphic (~> 3.1, >= 3.1.1)
       rdf-json (~> 3.1)
-      rdf-microdata (~> 3.1, >= 3.1.2)
+      rdf-microdata (~> 3.1, >= 3.1.4)
       rdf-n3 (~> 3.1, >= 3.1.2)
       rdf-normalize (~> 0.4)
       rdf-ordered-repo (~> 3.1, >= 3.1.1)
@@ -230,19 +231,19 @@ GEM
       rdf-reasoner (~> 0.7, >= 0.7.2)
       rdf-tabular (~> 3.1, >= 3.1.1)
       rdf-trig (~> 3.1, >= 3.1.2)
-      rdf-trix (~> 3.1)
+      rdf-trix (~> 3.1, >= 3.1.1)
       rdf-turtle (~> 3.1, >= 3.1.3)
-      rdf-vocab (~> 3.1, >= 3.1.12)
-      rdf-xsd (~> 3.1)
+      rdf-vocab (~> 3.1, >= 3.1.14)
+      rdf-xsd (~> 3.1, >= 3.1.1)
       shacl (~> 0.1, >= 0.1.1)
-      shex (~> 0.6, >= 0.6.1)
-      sparql (~> 3.1, >= 3.1.5)
+      shex (~> 0.6, >= 0.6.4)
+      sparql (~> 3.1, >= 3.1.8)
       sparql-client (~> 3.1, >= 3.1.2)
     listen (3.2.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    logger (1.4.3)
-    loofah (2.12.0)
+    logger (1.5.0)
+    loofah (2.13.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -251,11 +252,11 @@ GEM
     maruku (0.7.3)
     method_source (1.0.0)
     mini_magick (4.11.0)
-    mini_mime (1.1.1)
+    mini_mime (1.1.2)
     mini_portile2 (2.6.1)
-    minitest (5.14.4)
-    msgpack (1.4.2)
-    msgpack (1.4.2-java)
+    minitest (5.15.0)
+    msgpack (1.4.4)
+    msgpack (1.4.4-java)
     multi_json (1.15.0)
     multipart-post (2.1.1)
     net-http-persistent (4.0.1)
@@ -267,8 +268,6 @@ GEM
       racc (~> 1.4)
     nokogiri (1.12.5-java)
       racc (~> 1.4)
-    nokogumbo (2.0.5)
-      nokogiri (~> 1.8, >= 1.8.4)
     pg (0.21.0)
     pry (0.13.1)
       coderay (~> 1.1)
@@ -280,12 +279,12 @@ GEM
     pry-rails (0.3.9)
       pry (>= 0.10.4)
     public_suffix (4.0.6)
-    puma (5.5.0)
+    puma (5.5.2)
       nio4r (~> 2.0)
-    puma (5.5.0-java)
+    puma (5.5.2-java)
       nio4r (~> 2.0)
-    racc (1.5.2)
-    racc (1.5.2-java)
+    racc (1.6.0)
+    racc (1.6.0-java)
     rack (2.2.3)
     rack-mini-profiler (2.3.3)
       rack (>= 1.2.0)
@@ -330,9 +329,9 @@ GEM
       rdf (~> 3.1)
     rdf-json (3.1.0)
       rdf (~> 3.1)
-    rdf-microdata (3.1.3)
+    rdf-microdata (3.1.4)
       htmlentities (~> 4.3)
-      nokogiri (~> 1.10)
+      nokogiri (~> 1.12)
       rdf (~> 3.1, >= 3.1.13)
       rdf-rdfa (~> 3.1, >= 3.1.3)
       rdf-xsd (~> 3.1)
@@ -382,10 +381,10 @@ GEM
     rdf-xsd (3.1.1)
       rdf (~> 3.1)
       rexml (~> 3.2)
-    request_store (1.5.0)
+    request_store (1.5.1)
       rack (>= 1.4)
     rexml (3.2.5)
-    ruby-vips (2.1.3)
+    ruby-vips (2.1.4)
       ffi (~> 1.12)
     scanf (1.0.0)
     scrypt (3.0.7)
@@ -395,7 +394,7 @@ GEM
       rdf (~> 3.1, >= 3.1.8)
       sparql (~> 3.1)
       sxp (~> 1.1)
-    shex (0.6.3)
+    shex (0.6.4)
       ebnf (~> 2.1, >= 2.2)
       htmlentities (~> 4.3)
       json-ld (~> 3.1)
@@ -421,15 +420,15 @@ GEM
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
-    sprockets-rails (3.2.2)
-      actionpack (>= 4.0)
-      activesupport (>= 4.0)
+    sprockets-rails (3.4.2)
+      actionpack (>= 5.2)
+      activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     ssrf_filter (1.0.7)
     sxp (1.1.0)
       rdf (~> 3.1)
     temple (0.8.2)
-    thor (1.1.0)
+    thor (1.2.1)
     thread_safe (0.3.6)
     thread_safe (0.3.6-java)
     tilt (2.0.10)
@@ -455,9 +454,9 @@ PLATFORMS
 
 DEPENDENCIES
   better_errors
-  iqvoc (~> 4.12)!
-  iqvoc_compound_forms (~> 2.9.0)!
-  iqvoc_skosxl (~> 2.9.0)!
+  iqvoc (~> 4.13)!
+  iqvoc_compound_forms (~> 2.10.0)!
+  iqvoc_skosxl (~> 2.10.0)!
   listen
   pg (~> 0.21.0)
   pry-rails

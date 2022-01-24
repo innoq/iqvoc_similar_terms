@@ -1,0 +1,29 @@
+{
+  "name": "iqvoc_similar_terms",
+  "version": "2.10.0",
+  "description": "SimilarTerms extension for iQvoc",
+  "scripts": {
+    "watch": "faucet --watch",
+    "compile": "faucet --compact --fingerprint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/innoq/iqvoc_similar_terms.git"
+  },
+  "author": "",
+  "license": "Apache License 2.0",
+  "bugs": {
+    "url": "https://github.com/innoq/iqvoc_similar_terms/issues"
+  },
+  "homepage": "https://github.com/innoq/iqvoc_similar_terms#readme",
+  "devDependencies": {
+    "faucet-pipeline-js": "^2.1.7",
+    "faucet-pipeline-jsmin": "^2.1.7",
+    "faucet-pipeline-sass": "^1.6.0",
+    "faucet-pipeline-static": "^1.2.0"
+  },
+  "dependencies": {
+    "es6-promise": "^4.2.8",
+    "iqvoc": "github:innoq/iqvoc"
+  }
+}
