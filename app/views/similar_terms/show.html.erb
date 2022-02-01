@@ -41,7 +41,7 @@
             <i class="fa fa-search fa-lg"></i>
           </div>
           <div class="col">
-            <%= f.text_field :terms, hide_label: true, placeholder: 'Suchbegriff', wrapper_class: 'mb-0',
+            <%= f.text_field :terms, hide_label: true, placeholder: t('txt.views.similar_terms.placeholder'), wrapper_class: 'mb-0',
                              class: 'form-control-lg form-control-borderless border-0',
                              value: (@terms ? InlineDataHelper.generate_inline_values(@terms) : params[:terms])
             %>

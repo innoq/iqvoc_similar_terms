@@ -6,3 +6,4 @@ de:
         title: Ähnliche Begriffe
         results_heading: ähnliche Begriffe für '%{terms}'
         results: Ihre Suche nach <span class="text-primary">%{terms}</span> lieferte %{count} Ergebnisse
+        placeholder: Suchbegriff
