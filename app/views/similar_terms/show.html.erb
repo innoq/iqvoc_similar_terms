@@ -1,3 +1,33 @@
+<% if @results %>
+    <% if @results.any? %>
+      <h2 class="text-center my-5">
+        <%= raw t('txt.views.similar_terms.results', terms: @terms.join(', '), count: @results.size) %>
+      </h2>
+
+      <ol>
+        <% (@results || []).each do |data|
+          label = data[0]
+          concepts = data[1..-1]
+        %>
+          <li>
+            <%= label.value %>
+            (<%= concepts.map do |concept|
+            origin = concept.origin
+            link_to origin, rdf_url(origin, :format => nil, :lang => nil)
+          end.join(", ").html_safe %>)
+          </li>
+        <% end %>
+      </ol>
+
+    <% else %>
+      <h2 class="text-center my-5">
+        <%= t('txt.views.similar_terms.no_results') %>
+      </h2>
+    <% end %>
+  </h2>
+
+<% end %>
+
 <div class="frontpage-title text-center">
   <h1 class="my-5">
     <%= t("txt.views.similar_terms.title") %>
@@ -26,21 +56,3 @@
 
   </div>
 </div>
-
-<ol>
-  <% (@results || []).each do |data|
-    label = data[0]
-    concepts = data[1..-1]
-  %>
-    <li>
-      <%= label.value %>
-      (<%= concepts.map do |concept|
-        origin = concept.origin
-        link_to origin, rdf_url(origin, :format => nil, :lang => nil)
-      end.join(", ").html_safe %>)
-    </li>
-  <% end %>
-  <% if @results && @results.empty? %>
-    <%= t('txt.views.similar_terms.no_results') %>
-  <% end %>
-</ol>

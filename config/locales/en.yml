@@ -5,3 +5,4 @@ en:
         no_results: No results
         title: Similar Terms
         results_heading: similar terms for '%{terms}'
+        results: Your search <span class="text-primary">%{terms}</span> yielded %{results_size} results
