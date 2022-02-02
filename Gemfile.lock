@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/innoq/iqvoc.git
-  revision: f1f580387349e4d0e16fb962e0dc78dcfa4d2b2b
+  revision: 09ddfba9f5ba0da07d8d1d85dd3bdd8deef2f080
   branch: master
   specs:
     iqvoc (4.13.0)
@@ -279,9 +279,9 @@ GEM
     pry-rails (0.3.9)
       pry (>= 0.10.4)
     public_suffix (4.0.6)
-    puma (5.5.2)
+    puma (5.6.1)
       nio4r (~> 2.0)
-    puma (5.5.2-java)
+    puma (5.6.1-java)
       nio4r (~> 2.0)
     racc (1.6.0)
     racc (1.6.0-java)

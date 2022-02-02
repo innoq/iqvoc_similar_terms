@@ -9,13 +9,13 @@ class SimilarTermsControllerTest < ActionController::TestCase
   end
 
   test "routing" do
-    get :show, params: {
+    get :create, params: {
       lang: 'en',
       format: 'ttl'
     }
     assert_response 400
 
-    get :show, params: {
+    get :create, params: {
       lang: 'en',
       format: 'ttl',
       terms: 'foo'
@@ -25,7 +25,7 @@ class SimilarTermsControllerTest < ActionController::TestCase
   end
 
   test "single RDF representation" do
-    get :show, params: {
+    get :create, params: {
       lang: 'en',
       format: 'ttl',
       terms: 'forest'
@@ -47,7 +47,7 @@ query:top skos:altLabel "forest"@en;
   end
 
   test "multipe RDF representations" do
-    get :show, params: {
+    get :create, params: {
       lang: 'en',
       format: 'ttl',
       terms: 'forest,automobile'
@@ -71,7 +71,7 @@ query:top skos:altLabel "automobile"@en;
   end
 
   test "XML representation without results" do
-    get :show, params: {
+    get :create, params: {
       lang: 'en',
       format: 'xml',
       terms: 'foo'
@@ -89,7 +89,7 @@ query:top skos:altLabel "automobile"@en;
   end
 
   test "XML representation with results" do
-    get :show, params: {
+    get :create, params: {
       lang: 'en',
       format: 'xml',
       terms: 'forest'
@@ -106,7 +106,7 @@ query:top skos:altLabel "automobile"@en;
 
   test "RDF representation with pref labels of narrower and related concepts" do
     SkosImporter.new('test/concept_test.nt', 'http://localhost:3000/').run
-    get :show, params: {
+    get :create, params: {
       lang: 'en',
       format: 'ttl',
       terms: 'water'
@@ -123,7 +123,7 @@ EOS
 
   test "RDF representation with pref labels of narrower and related concepts - case insensitive" do
     SkosImporter.new('test/concept_test.nt', 'http://localhost:3000/').run
-    get :show, params: {
+    get :create, params: {
       lang: 'en',
       format: 'ttl',
       :terms => 'Water'
@@ -140,7 +140,7 @@ EOS
 
   test "Compound Forms in RDF representation" do
     SkosImporter.new('test/compound_forms.nt', 'http://hobbies.com/').run
-    get :show, params: {
+    get :create, params: {
       lang: 'en',
       format: 'ttl',
       terms: 'Computer'
@@ -153,7 +153,7 @@ EOS
 
   test "Compound Forms in RDF representation - case insensitive" do
     SkosImporter.new('test/compound_forms.nt', 'http://hobbies.com/').run
-    get :show, params: {
+    get :create, params: {
       lang: 'en',
       format: 'ttl',
       terms: 'computer'

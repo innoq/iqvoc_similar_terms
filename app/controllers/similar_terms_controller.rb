@@ -21,23 +21,20 @@ class SimilarTermsController < ApplicationController
               skos:altLabel "Baumart"@de.
   DOC
 
-  def show
+  def create
     authorize! :read, Iqvoc::Concept.base_class
 
-    unless params[:terms]
-      head 400 unless request.format.html? # non-GUI
-      return
-    end
-
-    @terms = InlineDataHelper.parse_inline_values(params[:terms])
+    @terms = InlineDataHelper.parse_inline_values(similar_terms_params)
     lang = params[:lang]
 
     respond_to do |format|
       format.html do
         @results = Iqvoc::SimilarTerms.ranked(lang, *@terms)
+        render :show
       end
       format.any(:rdf, :ttl, :xml) do
         @results = Iqvoc::SimilarTerms.alphabetical(lang, *@terms)
+        render :show
       end
       format.json {
         results = Iqvoc::SimilarTerms.alphabetical(lang, *@terms)
@@ -50,4 +47,12 @@ class SimilarTermsController < ApplicationController
     end
   end
 
+  def new
+  end
+
+  private
+
+  def similar_terms_params
+    params.require(:terms)
+  end
 end
