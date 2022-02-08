@@ -9,4 +9,4 @@ de:
         placeholder: Suchbegriff
         about:
           title: Der Dienst Ähnliche Begriffe
-          description: "Der Dienst Ähnliche Begriffe unterstützt Nutzer bei der Generierung von Suchanfragen. Zum eingegebenen Suchwort werden semantisch ähnliche Wörter aus dem Vokabular ermittelt und vorgeschlagen. Mit diesem Dienst können Suchanfragen semantisch erweitert und Suchergebnisse somit verbessert werden.\n\nUnter semantisch ähnlich werden Synonyme (Alternativen Benennungen) und Begriffe mit einer semantisch-assoziativen Beziehung zum Suchwort (Verwandte Begriffe) verstanden."
+          description: Zum Suchwort werden eine Auswahl semantisch passender Begriffe aus dem Vokabular vorgeschlagen. Neben Begriffen mit Schlagwortfunktion enthält die Auflistung auch die deutschen alternativen Benennungen zum Suchwort.
