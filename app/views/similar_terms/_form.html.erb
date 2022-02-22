@@ -5,7 +5,7 @@
     </div>
     <div class="col">
       <%= f.text_field :terms, hide_label: true, autofocus: (@terms ? false : true), wrapper_class: 'mb-0',
-                       class: 'form-control-lg form-control-borderless border-0',
+                       class: 'form-control-lg form-control-borderless border-0', autocomplete: 'off',
                        value: (@terms ? InlineDataHelper.generate_inline_values(@terms) : params[:terms])
       %>
     </div>
