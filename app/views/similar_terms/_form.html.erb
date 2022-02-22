@@ -1,26 +1,16 @@
-<div class="text-center my-5">
-  <h1 class="mb-5">
-    <%= t("txt.views.similar_terms.title") %>
-  </h1>
-
-  <div class="row justify-content-center">
-    <div class="col-12 col-md-10 col-lg-8">
-      <%= bootstrap_form_tag(url: similar_path, method: :get, html: { class: 'border' }) do |f| %>
-        <div class="p-3 row no-gutters align-items-center bg-white">
-          <div class="col-auto">
-            <i class="fa fa-search fa-lg"></i>
-          </div>
-          <div class="col">
-            <%= f.text_field :terms, hide_label: true, autofocus: (@terms ? false : true), placeholder: t('txt.views.similar_terms.placeholder'), wrapper_class: 'mb-0',
-                             class: 'form-control-lg form-control-borderless border-0',
-                             value: (@terms ? InlineDataHelper.generate_inline_values(@terms) : params[:terms])
-            %>
-          </div>
-          <div class="col-3">
-            <%= f.submit t('txt.views.search_results.submit'), class: 'btn btn-block btn-lg btn-primary' %>
-          </div>
-        </div>
-      <% end %>
+<%= bootstrap_form_tag(url: similar_path, method: :get, html: { class: 'border' }) do |f| %>
+  <div class="p-3 row no-gutters align-items-center bg-white">
+    <div class="col-auto">
+      <i class="fa fa-search fa-lg"></i>
+    </div>
+    <div class="col">
+      <%= f.text_field :terms, hide_label: true, autofocus: (@terms ? false : true), placeholder: t('txt.views.similar_terms.placeholder'), wrapper_class: 'mb-0',
+                       class: 'form-control-lg form-control-borderless border-0',
+                       value: (@terms ? InlineDataHelper.generate_inline_values(@terms) : params[:terms])
+      %>
+    </div>
+    <div class="col-3">
+      <%= f.submit t('txt.views.search_results.submit'), class: 'btn btn-block btn-lg btn-primary' %>
     </div>
   </div>
-</div>
+<% end %>
