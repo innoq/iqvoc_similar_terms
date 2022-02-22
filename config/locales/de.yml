@@ -6,7 +6,6 @@ de:
         title: Ähnliche Begriffe
         results_heading: ähnliche Begriffe für '%{terms}'
         results: Ihre Suche nach <span class="text-primary">%{terms}</span> ergab %{count} Treffer
-        placeholder: Suchbegriff
         about:
           title: Der Dienst Ähnliche Begriffe
           description: Zum Suchwort werden eine Auswahl semantisch passender Begriffe aus dem Wortgut vorgeschlagen. Neben Begriffen mit Schlagwortfunktion enthält die Auflistung auch die deutschen alternativen Benennungen zum Suchwort.
