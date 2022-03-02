@@ -32,7 +32,7 @@ class SimilarTermsController < ApplicationController
         @results = Iqvoc::SimilarTerms.ranked(lang, *@terms)
         render :show
       end
-      format.any(:rdf, :ttl, :xml) do
+      format.any(:rdf, :ttl, :nt, :xml) do
         @results = Iqvoc::SimilarTerms.alphabetical(lang, *@terms)
         render :show
       end
