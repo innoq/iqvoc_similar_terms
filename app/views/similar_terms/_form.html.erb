@@ -9,7 +9,7 @@
                        value: (@terms ? InlineDataHelper.generate_inline_values(@terms) : params[:terms])
       %>
     </div>
-    <div class="col-3">
+    <div class="col-auto">
       <%= f.submit t('txt.views.search_results.submit'), class: 'btn btn-block btn-lg btn-primary p-3' %>
     </div>
   </div>
