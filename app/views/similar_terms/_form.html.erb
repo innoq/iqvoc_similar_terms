@@ -5,12 +5,12 @@
     </div>
     <div class="col">
       <%= f.text_field :terms, hide_label: true, autofocus: (@terms ? false : true), wrapper_class: 'mb-0',
-                       class: 'form-control-lg form-control-borderless border-0 fs-2', autocomplete: 'off',
+                       class: 'form-control-lg form-control-borderless border-0', autocomplete: 'off',
                        value: (@terms ? InlineDataHelper.generate_inline_values(@terms) : params[:terms])
       %>
     </div>
     <div class="col-auto">
-      <%= f.submit t('txt.views.search_results.submit'), class: 'btn btn-block btn-lg btn-primary p-3' %>
+      <%= f.submit t('txt.views.search_results.submit'), class: 'btn btn-block btn-lg btn-primary p-2' %>
     </div>
   </div>
 <% end %>
