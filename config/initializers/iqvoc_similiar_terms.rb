@@ -1,1 +1,1 @@
-require 'iqvoc/similar_terms'
+require 'iqvoc_similar_terms'
