@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/innoq/iqvoc.git
+  remote: https://github.com/innoq/iqvoc.git
   revision: c2b9d1c6961e1ddbc8c831c5fd580687058b35a4
   branch: rails-6
   specs:
@@ -478,4 +478,4 @@ DEPENDENCIES
   web-console
 
 BUNDLED WITH
-   1.17.3
+   2.2.32
