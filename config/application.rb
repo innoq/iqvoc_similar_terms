@@ -30,5 +30,9 @@ module Iqvoc::SimilarTerms
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    #
+
+    # This tells iqvoc_similar_terms.rb whether it it runs as app or as engine
+    require 'iqvoc_similar_terms'
   end
 end

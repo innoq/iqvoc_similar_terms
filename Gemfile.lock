@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/innoq/iqvoc.git
-  revision: c2b9d1c6961e1ddbc8c831c5fd580687058b35a4
-  branch: rails-6
+  revision: 78849caa0a4073952c4ca30a46d2ccb5b1484986
+  branch: master
   specs:
     iqvoc (4.13.0)
       apipie-rails
@@ -26,24 +26,24 @@ GIT
       nokogiri
       puma (< 6.0)
       rack-mini-profiler
-      rails (~> 6.1.4, >= 6.1.4.4)
+      rails (~> 6.1.5, >= 6.1.5.1)
       rails_autolink
       rdf-vocab
       scrypt
 
 GIT
-  remote: https://github.com/innoq/iqvoc_compound_forms
-  revision: d5dab5ac2a76025e1d1c9d4630f78717955b15a4
-  branch: rails-6
+  remote: https://github.com/innoq/iqvoc_compound_forms.git
+  revision: 0ab0d424886efe0e3a243a93f8ceca7b0ec503a0
+  branch: master
   specs:
     iqvoc_compound_forms (2.10.0)
       iqvoc (~> 4.12, >= 4.5.0)
       iqvoc_skosxl (~> 2.10.0)
 
 GIT
-  remote: https://github.com/innoq/iqvoc_skosxl
-  revision: 81f30627fef640813a4dcacc4a67b897c9d37cd8
-  branch: rails-6
+  remote: https://github.com/innoq/iqvoc_skosxl.git
+  revision: e9ab8e5cadec641bf5fb3215381e66b2bf8a7a22
+  branch: master
   specs:
     iqvoc_skosxl (2.10.0)
       iqvoc (~> 4.13.0, >= 4.4.0)
