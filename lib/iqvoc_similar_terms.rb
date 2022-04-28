@@ -1,5 +1,6 @@
 # encoding: UTF-8
 
+require 'iqvoc/similar_terms'
 require 'iqvoc/similar_terms/version'
 
 module IqvocSimilarTerms
