@@ -5,19 +5,22 @@ module Services
 
     # returns an array of label/concepts pairs, sorted descendingly by weighting -- XXX: unused/deprecated
     # TODO: rename
-    def self.ranked(lang, *terms)
-      weighted(lang, *terms).sort_by { |label, _data| label }
+    def self.ranked(lang, options, *terms)
+      weighted(lang, options, *terms).sort_by { |label, _data| label }
                             .sort_by { |_label, data| data[0] }
                             .reverse
                             .map { |label, data| [label] + data[1..-1] } # drop weighting
     end
 
     # returns a list of labels, sorted alphabetically
-    def self.alphabetical(lang, *terms)
+    def self.alphabetical(lang, options, *terms)
       concepts = base_query(lang, *terms)
 
       results = concepts.map { |c| c.labelings.map { |ln| ln.target } }
-      results << find_related_and_narrower_concepts(concepts, lang, *terms).map { |c| c.pref_labels }
+
+      unless options[:synonyms_only]
+        results << find_related_and_narrower_concepts(concepts, lang, *terms).map { |c| c.pref_labels }
+      end
 
       results.flatten.sort_by { |l| l.value }
     end
@@ -40,7 +43,7 @@ module Services
     end
 
     # returns a hash of label/weighting+concepts pairs -- XXX: unused/deprecated
-    def self.weighted(lang, *terms) # TODO: rename
+    def self.weighted(lang, options, *terms) # TODO: rename
       concepts = base_query(lang, *terms)
 
       return terms.inject({}) do |memo, term|
@@ -59,13 +62,15 @@ module Services
           end
         end
 
-        find_related_and_narrower_concepts(concepts, lang, *terms).each do |c|
-          memo[c.pref_label] ||= []
-          # weighting
-          memo[c.pref_label][0] ||= 0
-          memo[c.pref_label][0] += 1
-          # associated concepts
-          memo[c.pref_label] << c unless memo[c.pref_label].include? c
+        unless options[:synonyms_only]
+          find_related_and_narrower_concepts(concepts, lang, *terms).each do |c|
+            memo[c.pref_label] ||= []
+            # weighting
+            memo[c.pref_label][0] ||= 0
+            memo[c.pref_label][0] += 1
+            # associated concepts
+            memo[c.pref_label] << c unless memo[c.pref_label].include? c
+          end
         end
 
         memo

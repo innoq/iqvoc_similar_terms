@@ -10,7 +10,7 @@ class ResultsTest < ActiveSupport::TestCase
   end
 
   test "ranked results" do
-    results = Services::SimilarTermsService.ranked("en", "forest")
+    results = Services::SimilarTermsService.ranked("en", {}, "forest")
     assert_equal 2, results.length
     assert_equal Iqvoc::XLLabel.base_class, results[0][0].class
     assert_equal "forest", results[0][0].value
@@ -18,7 +18,7 @@ class ResultsTest < ActiveSupport::TestCase
     assert_equal "woods", results[1][0].value
     assert_equal "forest", results[1][1].origin
 
-    results = Services::SimilarTermsService.ranked("en", "woods", "car")
+    results = Services::SimilarTermsService.ranked("en", {}, "woods", "car")
     assert_equal 4, results.length
     assert_equal "forest", results[0][0].value
     assert_equal "forest", results[0][1].origin
@@ -32,7 +32,7 @@ class ResultsTest < ActiveSupport::TestCase
   end
 
   test "weighted results" do
-    results = Services::SimilarTermsService.weighted("en", "forest")
+    results = Services::SimilarTermsService.weighted("en", {}, "forest")
     assert_equal 2, results.keys.length
     expected = { "forest" => 5, "woods" => 2 }
     results.each do |label, data|
@@ -45,7 +45,7 @@ class ResultsTest < ActiveSupport::TestCase
 
   #TODO: add a related concept relation and also test it
   test "inclusion of pref labels of narrower and related concepts" do
-    results = Services::SimilarTermsService.weighted("en", "water")
+    results = Services::SimilarTermsService.weighted("en", {}, "water")
     assert_equal 5, results.length
     assert_equal "water", results.keys.first.value
     assert_equal 5, results[results.keys.first][0]
@@ -60,7 +60,7 @@ class ResultsTest < ActiveSupport::TestCase
   end
 
   test "inclusion of pref labels of narrower and related concepts - case insensitive" do
-    results = Services::SimilarTermsService.weighted("en", "Water")
+    results = Services::SimilarTermsService.weighted("en", {}, "Water")
     assert_equal 5, results.length
     assert_equal "water", results.keys.first.value
     assert_equal 5, results[results.keys.first][0]
@@ -75,13 +75,13 @@ class ResultsTest < ActiveSupport::TestCase
   end
 
   test "no results" do
-    results = Services::SimilarTermsService.weighted("de", "water")
+    results = Services::SimilarTermsService.weighted("de", {}, "water")
     assert_equal 0, results.length
   end
 
   test "compound returns - case insensitive" do
     SkosImporter.new('test/compound_forms.nt', 'http://hobbies.com/').run
-    results = Services::SimilarTermsService.weighted("de", "computer")
+    results = Services::SimilarTermsService.weighted("de", {}, "computer")
     assert_equal 1, results.length
     assert_equal "Computer programming", results.keys.first.value
     assert_equal 1, results[results.keys.first][0]
@@ -89,7 +89,7 @@ class ResultsTest < ActiveSupport::TestCase
 
   test "compound returns" do
     SkosImporter.new('test/compound_forms.nt', 'http://hobbies.com/').run
-    results = Services::SimilarTermsService.weighted("de", "Computer")
+    results = Services::SimilarTermsService.weighted("de", {}, "Computer")
     assert_equal 1, results.length
     assert_equal "Computer programming", results.keys.first.value
     assert_equal 1, results[results.keys.first][0]
@@ -98,7 +98,7 @@ class ResultsTest < ActiveSupport::TestCase
   test "nothing unpublished" do
     concept = Iqvoc::XLLabel.base_class.where(value: "forest").first.concepts.first
     concept.update(published_at: nil)
-    results = Services::SimilarTermsService.weighted("en", "forest")
+    results = Services::SimilarTermsService.weighted("en", {}, "forest")
     assert_equal 0, results.length
   end
 

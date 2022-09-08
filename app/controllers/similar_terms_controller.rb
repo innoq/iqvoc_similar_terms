@@ -26,18 +26,21 @@ class SimilarTermsController < ApplicationController
 
     @terms = InlineDataHelper.parse_inline_values(similar_terms_params)
     lang = params[:lang]
+    options = {
+      synonyms_only: ['1', 'true'].include?(params[:synonyms_only])
+    }
 
     respond_to do |format|
       format.html do
-        @results = Services::SimilarTermsService.ranked(lang, *@terms)
+        @results = Services::SimilarTermsService.ranked(lang, options, *@terms)
         render :show
       end
       format.any(:rdf, :ttl, :nt, :xml) do
-        @results = Services::SimilarTermsService.alphabetical(lang, *@terms)
+        @results = Services::SimilarTermsService.alphabetical(lang, options, *@terms)
         render :show
       end
       format.json {
-        results = Services::SimilarTermsService.alphabetical(lang, *@terms)
+        results = Services::SimilarTermsService.alphabetical(lang, options, *@terms)
         render json: {
           "url": request.original_url,
           "total_results": results.length,
