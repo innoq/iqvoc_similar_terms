@@ -29,15 +29,15 @@ class SimilarTermsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        @results = Iqvoc::SimilarTerms.ranked(lang, *@terms)
+        @results = Services::SimilarTermsService.ranked(lang, *@terms)
         render :show
       end
       format.any(:rdf, :ttl, :nt, :xml) do
-        @results = Iqvoc::SimilarTerms.alphabetical(lang, *@terms)
+        @results = Services::SimilarTermsService.alphabetical(lang, *@terms)
         render :show
       end
       format.json {
-        results = Iqvoc::SimilarTerms.alphabetical(lang, *@terms)
+        results = Services::SimilarTermsService.alphabetical(lang, *@terms)
         render json: {
           "url": request.original_url,
           "total_results": results.length,
