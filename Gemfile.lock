@@ -1,12 +1,12 @@
 GIT
   remote: https://github.com/innoq/iqvoc.git
-  revision: ab6f63bae8a03b003131f2c50124e71ebfc5f472
+  revision: 42b267bdab0fd310b66c7d758b0deacb0ebe6180
   branch: master
   specs:
     iqvoc (4.13.2)
       apipie-rails
       authlogic
-      bootsnap (>= 1.4.4)
+      bootsnap
       bootstrap_form (~> 4.0)
       bundler
       cancancan
@@ -23,8 +23,9 @@ GIT
       kaminari
       linkeddata
       maruku
+      net-http
       nokogiri
-      puma (< 6.0)
+      puma
       rack-mini-profiler
       rails (~> 6.1.5, >= 6.1.5.1)
       rails_autolink
@@ -128,14 +129,14 @@ GEM
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
     bindex (0.8.1)
-    bootsnap (1.13.0)
+    bootsnap (1.15.0)
       msgpack (~> 1.2)
     bootstrap_form (4.5.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
     builder (3.2.4)
     cancancan (3.4.0)
-    carrierwave (2.2.2)
+    carrierwave (2.2.3)
       activemodel (>= 5.0.0)
       activesupport (>= 5.0.0)
       addressable (~> 2.6)
@@ -148,6 +149,8 @@ GEM
     connection_pool (2.3.0)
     crass (1.0.6)
     database_cleaner (1.8.5)
+    date (3.3.1)
+    date (3.3.1-java)
     deep_cloneable (3.2.0)
       activerecord (>= 3.1.0, < 8)
     delayed_job (4.1.11)
@@ -214,9 +217,9 @@ GEM
       bundler
     iq_triplestorage (0.2.2)
     jar-dependencies (0.4.1)
-    json (2.6.2)
-    json (2.6.2-java)
-    json-canonicalization (0.3.0)
+    json (2.6.3)
+    json (2.6.3-java)
+    json-canonicalization (0.3.1)
     json-ld (3.2.3)
       htmlentities (~> 4.3)
       json-canonicalization (~> 0.3)
@@ -224,7 +227,7 @@ GEM
       multi_json (~> 1.15)
       rack (~> 2.2)
       rdf (~> 3.2, >= 3.2.9)
-    json-ld-preloaded (3.2.1)
+    json-ld-preloaded (3.2.2)
       json-ld (~> 3.2)
       rdf (~> 3.2)
     kaminari (1.2.2)
@@ -277,17 +280,20 @@ GEM
     listen (3.2.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    logger (1.5.1)
+    logger (1.5.2)
     loofah (2.19.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
-    mail (2.7.1)
+    mail (2.8.0)
       mini_mime (>= 0.1.1)
+      net-imap
+      net-pop
+      net-smtp
     marcel (1.0.2)
     maruku (0.7.3)
     matrix (0.4.2)
     method_source (1.0.0)
-    mini_magick (4.11.0)
+    mini_magick (4.12.0)
     mini_mime (1.1.2)
     mini_portile2 (2.8.0)
     minitest (5.16.3)
@@ -295,14 +301,25 @@ GEM
     msgpack (1.6.0-java)
     multi_json (1.15.0)
     multipart-post (2.2.3)
+    net-http (0.3.1)
+      uri
     net-http-persistent (4.0.1)
       connection_pool (~> 2.2)
+    net-imap (0.3.2)
+      date
+      net-protocol
+    net-pop (0.1.2)
+      net-protocol
+    net-protocol (0.2.1)
+      timeout
+    net-smtp (0.3.3)
+      net-protocol
     nio4r (2.5.8)
     nio4r (2.5.8-java)
-    nokogiri (1.13.9)
+    nokogiri (1.13.10)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
-    nokogiri (1.13.9-java)
+    nokogiri (1.13.10-java)
       racc (~> 1.4)
     pg (1.4.2)
     pry (0.13.1)
@@ -314,17 +331,17 @@ GEM
       spoon (~> 0.0)
     pry-rails (0.3.9)
       pry (>= 0.10.4)
-    psych (4.0.6)
+    psych (5.0.1)
       stringio
-    psych (4.0.6-java)
+    psych (5.0.1-java)
       jar-dependencies (>= 0.1.7)
-    public_suffix (5.0.0)
-    puma (5.6.5)
+    public_suffix (5.0.1)
+    puma (6.0.0)
       nio4r (~> 2.0)
-    puma (5.6.5-java)
+    puma (6.0.0-java)
       nio4r (~> 2.0)
-    racc (1.6.0)
-    racc (1.6.0-java)
+    racc (1.6.1)
+    racc (1.6.1-java)
     rack (2.2.4)
     rack-mini-profiler (3.0.0)
       rack (>= 1.2.0)
@@ -350,7 +367,7 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.4.3)
       loofah (~> 2.3)
-    rails_autolink (1.1.6)
+    rails_autolink (1.1.7)
       rails (> 3.1)
     railties (6.1.7)
       actionpack (= 6.1.7)
@@ -384,7 +401,7 @@ GEM
       rdf (~> 3.2)
       sparql (~> 3.2)
       sxp (~> 1.2)
-    rdf-normalize (0.5.0)
+    rdf-normalize (0.5.1)
       rdf (~> 3.2)
     rdf-ordered-repo (3.2.1)
       rdf (~> 3.2, >= 3.2.1)
@@ -420,7 +437,7 @@ GEM
     rdf-turtle (3.2.1)
       ebnf (~> 2.3)
       rdf (~> 3.2)
-    rdf-vocab (3.2.2)
+    rdf-vocab (3.2.3)
       rdf (~> 3.2, >= 3.2.4)
     rdf-xsd (3.2.1)
       rdf (~> 3.2)
@@ -470,16 +487,18 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     ssrf_filter (1.1.1)
-    stringio (3.0.2)
+    stringio (3.0.4)
     sxp (1.2.3)
       matrix (~> 0.4)
       rdf (~> 3.2)
     temple (0.9.1)
     thor (1.2.1)
     tilt (2.0.11)
+    timeout (0.3.1)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
     unicode-types (1.8.0)
+    uri (0.12.0)
     web-console (3.7.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -495,7 +514,7 @@ GEM
       psych (>= 3.3)
       rdf (~> 3.2, >= 3.2.9)
       rdf-xsd (~> 3.2)
-    zeitwerk (2.6.1)
+    zeitwerk (2.6.6)
 
 PLATFORMS
   java
@@ -512,4 +531,4 @@ DEPENDENCIES
   web-console
 
 BUNDLED WITH
-   2.3.18
+   2.3.26
