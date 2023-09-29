@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/innoq/iqvoc.git
-  revision: 3e294f4401916fd5eab0154b3fc22ee5b8f387bb
+  revision: 045b089839b93acce8c15ace6d23adf197ebf3aa
   branch: master
   specs:
-    iqvoc (4.14.0)
+    iqvoc (4.14.1)
       apipie-rails
       authlogic
       bootsnap
@@ -198,18 +198,14 @@ GEM
       faraday (~> 1.0)
     faucet_pipeline_rails (1.0.1)
       rails (>= 4.2.10)
-    ffi (1.15.5)
-    ffi (1.15.5-java)
+    ffi (1.16.2)
+    ffi (1.16.2-java)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
     globalid (1.2.1)
       activesupport (>= 6.1)
-    haml (6.1.2)
-      temple (>= 0.8.2)
-      thor
-      tilt
-    haml (6.1.2-java)
+    haml (6.2.0)
       temple (>= 0.8.2)
       thor
       tilt
@@ -306,7 +302,7 @@ GEM
     mini_magick (4.12.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.4)
-    minitest (5.19.0)
+    minitest (5.20.0)
     msgpack (1.7.2)
     msgpack (1.7.2-java)
     multi_json (1.15.0)
@@ -522,7 +518,7 @@ GEM
       psych (>= 3.3)
       rdf (~> 3.2, >= 3.2.9)
       rdf-xsd (~> 3.2)
-    zeitwerk (2.6.11)
+    zeitwerk (2.6.12)
 
 PLATFORMS
   java
