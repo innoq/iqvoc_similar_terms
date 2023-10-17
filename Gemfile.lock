@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/innoq/iqvoc.git
-  revision: 045b089839b93acce8c15ace6d23adf197ebf3aa
+  revision: 857b251d20a4794968b81abb3481e522ca63eb3b
   branch: master
   specs:
-    iqvoc (4.14.1)
+    iqvoc (4.14.2)
       apipie-rails
       authlogic
       bootsnap
@@ -35,20 +35,20 @@ GIT
 
 GIT
   remote: https://github.com/innoq/iqvoc_compound_forms.git
-  revision: b5bbf18d8e6ffca9f72f14ee47f2fb1b8230d93a
+  revision: 5f95c1579a4ca239e6233f7d1038c3beab7f7762
   branch: master
   specs:
-    iqvoc_compound_forms (2.11.0)
-      iqvoc (~> 4.14.0)
-      iqvoc_skosxl (~> 2.11.0)
+    iqvoc_compound_forms (2.11.2)
+      iqvoc (~> 4.14.2)
+      iqvoc_skosxl (~> 2.11.2)
 
 GIT
   remote: https://github.com/innoq/iqvoc_skosxl.git
-  revision: 893cfd5c97d31cc25f5f49f4b842a2c4a0a4c68e
+  revision: 16f4879cb865c45c30bb7afe52c1690381a24841
   branch: master
   specs:
-    iqvoc_skosxl (2.11.0)
-      iqvoc (~> 4.14.0, >= 4.4.0)
+    iqvoc_skosxl (2.11.2)
+      iqvoc (~> 4.14.2)
 
 GEM
   remote: https://rubygems.org/
@@ -120,7 +120,7 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.5)
       public_suffix (>= 2.0.2, < 6.0)
-    apipie-rails (1.2.2)
+    apipie-rails (1.2.3)
       actionpack (>= 5.0)
       activesupport (>= 5.0)
     authlogic (6.4.2)
@@ -141,7 +141,7 @@ GEM
       activemodel (>= 5.2)
     builder (3.2.4)
     cancancan (3.5.0)
-    carrierwave (3.0.3)
+    carrierwave (3.0.4)
       activemodel (>= 6.0.0)
       activesupport (>= 6.0.0)
       addressable (~> 2.6)
@@ -161,7 +161,7 @@ GEM
       activerecord (>= 3.1.0, < 8)
     delayed_job (4.1.11)
       activesupport (>= 3.0, < 8.0)
-    delayed_job_active_record (4.1.7)
+    delayed_job_active_record (4.1.8)
       activerecord (>= 3.0, < 8.0)
       delayed_job (>= 3.0, < 5)
     ebnf (2.4.0)
@@ -205,7 +205,7 @@ GEM
       rake
     globalid (1.2.1)
       activesupport (>= 6.1)
-    haml (6.2.0)
+    haml (6.2.3)
       temple (>= 0.8.2)
       thor
       tilt
@@ -311,7 +311,7 @@ GEM
       uri
     net-http-persistent (4.0.2)
       connection_pool (~> 2.2)
-    net-imap (0.3.7)
+    net-imap (0.4.1)
       date
       net-protocol
     net-pop (0.1.2)
@@ -337,9 +337,9 @@ GEM
       spoon (~> 0.0)
     pry-rails (0.3.9)
       pry (>= 0.10.4)
-    psych (5.1.0)
+    psych (5.1.1.1)
       stringio
-    psych (5.1.0-java)
+    psych (5.1.1.1-java)
       jar-dependencies (>= 0.1.7)
     public_suffix (5.0.3)
     puma (6.4.0)
@@ -495,13 +495,13 @@ GEM
     sxp (1.3.0)
       matrix (~> 0.4)
       rdf (~> 3.3)
-    temple (0.10.2)
+    temple (0.10.3)
     thor (1.2.2)
     tilt (2.3.0)
     timeout (0.4.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    unicode-types (1.8.0)
+    unicode-types (1.9.0)
     uri (0.12.2)
     web-console (4.2.1)
       actionview (>= 6.0.0)
@@ -526,9 +526,9 @@ PLATFORMS
 
 DEPENDENCIES
   better_errors
-  iqvoc (~> 4.14.0)!
-  iqvoc_compound_forms (~> 2.11.0)!
-  iqvoc_skosxl (~> 2.11.0)!
+  iqvoc (~> 4.14.2)!
+  iqvoc_compound_forms (~> 2.11.2)!
+  iqvoc_skosxl (~> 2.11.2)!
   listen
   pg
   pry-rails
