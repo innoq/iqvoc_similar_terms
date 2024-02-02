@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/innoq/iqvoc.git
-  revision: 777cd36fb3e4e98bb448ef2c4f582307c28a81fb
+  revision: d361b91079dfd0b3c929f5b42a6086600b7e5bce
   branch: master
   specs:
-    iqvoc (4.14.4)
+    iqvoc (4.14.5)
       apipie-rails
       authlogic
       bootsnap
@@ -35,20 +35,20 @@ GIT
 
 GIT
   remote: https://github.com/innoq/iqvoc_compound_forms.git
-  revision: ae534fc2820224eb8fc9795280bd6cebbb10f7b2
+  revision: ea62bfb76972747c075c43ae657510f7b3588d60
   branch: master
   specs:
-    iqvoc_compound_forms (2.11.3)
+    iqvoc_compound_forms (2.11.4)
       iqvoc (~> 4.14.4)
       iqvoc_skosxl (~> 2.11.3)
 
 GIT
   remote: https://github.com/innoq/iqvoc_skosxl.git
-  revision: 8890fe11dd150f79c027cdc360c1c23b4ab08613
+  revision: a484525360de98f69a94734e803983528f53172c
   branch: master
   specs:
-    iqvoc_skosxl (2.11.3)
-      iqvoc (~> 4.14.4)
+    iqvoc_skosxl (2.11.4)
+      iqvoc (~> 4.14.5)
 
 GEM
   remote: https://rubygems.org/

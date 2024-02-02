@@ -1,6 +1,6 @@
 {
   "name": "iqvoc_similar_terms",
-  "version": "2.11.3",
+  "version": "2.11.4",
   "description": "SimilarTerms extension for iQvoc",
   "scripts": {
     "watch": "faucet --watch",
