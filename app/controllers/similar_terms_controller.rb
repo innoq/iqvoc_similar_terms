@@ -24,29 +24,44 @@ class SimilarTermsController < ApplicationController
   def create
     authorize! :read, Iqvoc::Concept.base_class
 
-    @terms = InlineDataHelper.parse_inline_values(similar_terms_params)
     lang = params[:lang]
     options = {
       synonyms_only: ['1', 'true'].include?(params[:synonyms_only])
     }
 
-    respond_to do |format|
-      format.html do
-        @results = Services::SimilarTermsService.ranked(lang, options, *@terms)
-        render :show
+    begin
+      @terms = InlineDataHelper.parse_inline_values(similar_terms_params)
+
+      respond_to do |format|
+        format.html do
+          @results = Services::SimilarTermsService.ranked(lang, options, *@terms)
+          render :show
+        end
+        format.any(:rdf, :ttl, :nt, :xml) do
+          @results = Services::SimilarTermsService.alphabetical(lang, options, *@terms)
+          render :show
+        end
+        format.json do
+          results = Services::SimilarTermsService.alphabetical(lang, options, *@terms)
+          render json: create_json_response(results.map { |c| c.value })
+        end
       end
-      format.any(:rdf, :ttl, :nt, :xml) do
-        @results = Services::SimilarTermsService.alphabetical(lang, options, *@terms)
-        render :show
+
+    rescue CSV::MalformedCSVError => e
+      respond_to do |format|
+        format.html do
+          flash[:error] = I18n.t('txt.controllers.similar_terms.parsing_error')
+          redirect_to new_similar_url
+        end
+        format.any(:rdf, :ttl, :nt, :xml) do
+          @terms = []
+          @results = []
+          render :show
+        end
+        format.json do
+          render json: create_json_response([])
+        end
       end
-      format.json {
-        results = Services::SimilarTermsService.alphabetical(lang, options, *@terms)
-        render json: {
-          "url": request.original_url,
-          "total_results": results.length,
-          "results": results.map {|c| c.value }
-        }.to_json
-      }
     end
   end
 
@@ -54,6 +69,14 @@ class SimilarTermsController < ApplicationController
   end
 
   private
+
+  def create_json_response(results)
+    {
+      "url": request.original_url,
+      "total_results": results.length,
+      "results": results
+    }.to_json
+  end
 
   def similar_terms_params
     params.require(:terms)

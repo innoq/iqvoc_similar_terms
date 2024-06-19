@@ -1,5 +1,8 @@
 en:
   txt:
+    controllers:
+      similar_terms:
+        parsing_error: Invalid input
     views:
       similar_terms:
         no_results: No results

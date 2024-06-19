@@ -1,5 +1,8 @@
 de:
   txt:
+    controllers:
+      similar_terms:
+        parsing_error: Ungültige Eingabe
     views:
       similar_terms:
         no_results: Keine Ergebnisse

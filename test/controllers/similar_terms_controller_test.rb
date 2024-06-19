@@ -118,7 +118,7 @@ query:top skos:altLabel "new water"@en;
           skos:altLabel "related"@en;
           skos:altLabel "used water"@en;
           skos:altLabel "water"@en.
-EOS
+    EOS
   end
 
   test "RDF representation with pref labels of narrower and related concepts - case insensitive" do
@@ -135,7 +135,7 @@ query:top skos:altLabel "new water"@en;
           skos:altLabel "related"@en;
           skos:altLabel "used water"@en;
           skos:altLabel "water"@en.
-EOS
+    EOS
   end
 
   test "Compound Forms in RDF representation" do
@@ -148,7 +148,7 @@ EOS
     assert_response :success
     assert @response.body.include?(<<-EOS.strip)
       query:top skos:altLabel "Computer programming"@en.
-      EOS
+    EOS
   end
 
   test "Compound Forms in RDF representation - case insensitive" do
@@ -161,7 +161,29 @@ EOS
     assert_response :success
     assert @response.body.include?(<<-EOS.strip)
       query:top skos:altLabel "Computer programming"@en.
-      EOS
+    EOS
+  end
+
+  test 'invalid terms - HTML representation' do
+    get :create, params: {
+      lang: 'en',
+      format: 'html',
+      terms: '"blabla'
+    }
+
+    assert_redirected_to new_similar_url
+  end
+
+  test 'invalid terms - JSON representation' do
+    get :create, params: {
+      lang: 'en',
+      format: 'json',
+      terms: '"blabla'
+    }
+    assert_response :success
+    assert @response.body.include?(<<-EOS.strip)
+      "total_results":0,"results":[]
+    EOS
   end
 
 end
