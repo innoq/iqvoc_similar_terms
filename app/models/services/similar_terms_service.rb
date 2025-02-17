@@ -102,9 +102,9 @@ module Services
                                                  .map(&:label_id)
                                                  .first
 
-                    Iqvoc::XLLabel.base_class.where(:language => lang, :id => label_id).first
+                    Iqvoc::Xllabel.base_class.where(:language => lang, :id => label_id).first
                   else
-                    Iqvoc::XLLabel.base_class.where('LOWER(value) = ?', term.downcase).first
+                    Iqvoc::Xllabel.base_class.where('LOWER(value) = ?', term.downcase).first
                   end
 
           results << label.compound_in.map { |ci| ci.concepts.map { |c| c.id } } if label.present?
@@ -125,9 +125,9 @@ module Services
                                       .where(normal_hash: reduce.call(hashes))
                                       .map(&:label_id)
 
-        return Iqvoc::XLLabel.base_class.where(language: lang, id: reduce.call(label_ids))
-      elsif Iqvoc.const_defined?(:XLLabel)
-        return Iqvoc::XLLabel.base_class
+        return Iqvoc::Xllabel.base_class.where(language: lang, id: reduce.call(label_ids))
+      elsif Iqvoc.const_defined?(:Xllabel)
+        return Iqvoc::Xllabel.base_class
                              .where(language: lang)
                              .where('LOWER(value) IN (?)', terms.map(&:downcase))
       else
