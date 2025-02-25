@@ -12,7 +12,7 @@ class ResultsTest < ActiveSupport::TestCase
   test "ranked results" do
     results = Services::SimilarTermsService.ranked("en", {}, "forest")
     assert_equal 2, results.length
-    assert_equal Iqvoc::XLLabel.base_class, results[0][0].class
+    assert_equal Iqvoc::Xllabel.base_class, results[0][0].class
     assert_equal "forest", results[0][0].value
     assert_equal "forest", results[0][1].origin
     assert_equal "woods", results[1][0].value
@@ -36,7 +36,7 @@ class ResultsTest < ActiveSupport::TestCase
     assert_equal 2, results.keys.length
     expected = { "forest" => 5, "woods" => 2 }
     results.each do |label, data|
-      assert_equal Iqvoc::XLLabel.base_class, label.class
+      assert_equal Iqvoc::Xllabel.base_class, label.class
       assert_equal 2, data.length
       assert_equal expected[label.value], data[0]
       assert_equal Iqvoc::Concept.base_class, data[1].class
@@ -96,7 +96,7 @@ class ResultsTest < ActiveSupport::TestCase
   end
 
   test "nothing unpublished" do
-    concept = Iqvoc::XLLabel.base_class.where(value: "forest").first.concepts.first
+    concept = Iqvoc::Xllabel.base_class.where(value: "forest").first.concepts.first
     concept.update(published_at: nil)
     results = Services::SimilarTermsService.weighted("en", {}, "forest")
     assert_equal 0, results.length

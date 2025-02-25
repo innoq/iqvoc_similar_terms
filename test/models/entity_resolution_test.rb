@@ -26,7 +26,7 @@ class EntityResolutionTest < ActiveSupport::TestCase
     labels = labels.all
 
     assert_equal 1, labels.length
-    assert_equal Iqvoc::XLLabel.base_class, labels[0].class
+    assert_equal Iqvoc::Xllabel.base_class, labels[0].class
     assert_equal "forest", labels[0].value
     assert_equal "en", labels[0].language
 
@@ -36,7 +36,7 @@ class EntityResolutionTest < ActiveSupport::TestCase
     labels = Services::SimilarTermsService.terms_to_labels("en", "foo")
     assert_equal 0, labels.count
 
-    # TODO: test XLLabel and Inflectional variants
+    # TODO: test Xllabel and Inflectional variants
   end
 
 end
