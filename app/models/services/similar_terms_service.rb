@@ -14,12 +14,15 @@ module Services
 
     # returns a list of labels, sorted alphabetically
     def self.alphabetical(lang, options, *terms)
+      results = []
       concepts = base_query(lang, *terms)
 
-      results = concepts.map { |c| c.labelings.map { |ln| ln.target } }
+      unless options[:similar_only]
+        results.concat(concepts.map { |c| c.labelings.map { |ln| ln.target } })
+      end
 
       unless options[:synonyms_only]
-        results << find_related_and_narrower_concepts(concepts, lang, *terms).map { |c| c.pref_labels }
+        results.concat(find_related_and_narrower_concepts(concepts, lang, *terms).map { |c| c.pref_labels })
       end
 
       results.flatten.sort_by { |l| l.value }
@@ -47,18 +50,20 @@ module Services
       concepts = base_query(lang, *terms)
 
       return terms.inject({}) do |memo, term|
-        concepts.each do |concept|
-          concept.labelings.each do |ln|
-            concept = ln.owner
-            label = ln.target
-            weight = @@weightings[ln.class.name]
+        unless options[:similar_only]
+          concepts.each do |concept|
+            concept.labelings.each do |ln|
+              concept = ln.owner
+              label = ln.target
+              weight = @@weightings[ln.class.name]
 
-            memo[label] ||= []
-            # weighting
-            memo[label][0] ||= 0
-            memo[label][0] += weight
-            # associated concepts
-            memo[label] << concept unless memo[label].include? concept
+              memo[label] ||= []
+              # weighting
+              memo[label][0] ||= 0
+              memo[label][0] += weight
+              # associated concepts
+              memo[label] << concept unless memo[label].include? concept
+            end
           end
         end
 

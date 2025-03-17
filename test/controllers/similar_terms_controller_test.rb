@@ -186,4 +186,50 @@ query:top skos:altLabel "new water"@en;
     EOS
   end
 
+  test "synonyms only filter" do
+    SkosImporter.new('test/concept_test.nt', 'http://localhost:3000/').run
+    get :create, params: {
+      lang: 'en',
+      format: 'ttl',
+      terms: 'Water',
+      synonyms_only: 'true'
+    }
+    assert_response :success
+    assert @response.body.include?(<<-EOS.strip)
+query:top skos:altLabel "real water"@en;
+          skos:altLabel "water"@en.
+    EOS
+  end
+
+  test "similar only filter" do
+    SkosImporter.new('test/concept_test.nt', 'http://localhost:3000/').run
+    get :create, params: {
+      lang: 'en',
+      format: 'ttl',
+      terms: 'Water',
+      similar_only: 'true'
+    }
+    assert_response :success
+    assert @response.body.include?(<<-EOS.strip)
+query:top skos:altLabel "new water"@en;
+          skos:altLabel "related"@en;
+          skos:altLabel "used water"@en.
+    EOS
+  end
+
+  test "empty result with synonyms_only and similar only" do
+    SkosImporter.new('test/concept_test.nt', 'http://localhost:3000/').run
+    get :create, params: {
+      lang: 'en',
+      format: 'ttl',
+      terms: 'Water',
+      synonyms_only: 'true',
+      similar_only: 'true'
+    }
+    assert_response :success
+
+    # no results and no "query:top ..."
+    refute @response.body.include? 'query:top'
+  end
+
 end

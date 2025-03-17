@@ -26,7 +26,8 @@ class SimilarTermsController < ApplicationController
 
     lang = params[:lang]
     options = {
-      synonyms_only: ['1', 'true'].include?(params[:synonyms_only])
+      synonyms_only: %w[1 true].include?(params[:synonyms_only]),
+      similar_only: %w[1 true].include?(params[:similar_only]),
     }
 
     begin
