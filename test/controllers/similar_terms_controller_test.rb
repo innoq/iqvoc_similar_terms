@@ -217,7 +217,7 @@ query:top skos:altLabel "new water"@en;
     EOS
   end
 
-  test "empty result with synonyms_only and similar only" do
+  test "illegal parameter combination with synonyms_only and similar_only" do
     SkosImporter.new('test/concept_test.nt', 'http://localhost:3000/').run
     get :create, params: {
       lang: 'en',
@@ -226,10 +226,17 @@ query:top skos:altLabel "new water"@en;
       synonyms_only: 'true',
       similar_only: 'true'
     }
-    assert_response :success
+    assert_response :bad_request
 
-    # no results and no "query:top ..."
-    refute @response.body.include? 'query:top'
+    get :create, params: {
+      lang: 'en',
+      format: 'json',
+      terms: 'Water',
+      synonyms_only: 'true',
+      similar_only: 'true'
+    }
+    assert_response :bad_request
+    assert JSON.parse(@response.body)['message'].include?('The combination of parameters synonyms_only, similar_only is not allowed.')
   end
 
 end
