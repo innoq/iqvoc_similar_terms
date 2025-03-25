@@ -9,7 +9,9 @@ de:
         title: Ähnliche Begriffe
         results_heading: ähnliche Begriffe für '%{terms}'
         results: Ihre Suche nach <span class="text-primary">%{terms}</span> ergab %{count} Treffer
-        synonyms_only: Nur Synonyme anzeigen
+        synonyms_only: Nur Synonyme
+        related_only: Nur verwandte Begriffe
+        continue_with_term: Mit "%{term}" weitersuchen
         about:
           title: Der Dienst Ähnliche Begriffe
-          description: Zum Suchwort werden eine Auswahl semantisch passender Begriffe aus dem Wortgut vorgeschlagen. Neben Begriffen mit Schlagwortfunktion enthält die Auflistung auch die deutschen alternativen Benennungen zum Suchwort.
+          description: Zum eingegebenen Suchwort wird eine Auswahl semantisch passender Begriffe aus dem kontrollierten Wortgut vorgeschlagen - Synonyme (alternative Benennungen) und/oder verwandte Begriffe inklusive Ober-/Unterbegriffe.

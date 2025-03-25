@@ -16,7 +16,9 @@
   </div>
   <div class="py-3 row">
     <div class="col-auto">
-      <%= f.check_box :synonyms_only, label: t('txt.views.similar_terms.synonyms_only'), checked: ['1', 'true'].include?(params[:synonyms_only]) %>
+      <%= f.radio_button :mode, :all, label: "Alle", inline: true, checked: (params[:mode] == 'all' or params[:mode].blank? ) %>
+      <%= f.radio_button :mode, :synonyms_only, label: t('txt.views.similar_terms.synonyms_only'), inline: true, checked: params[:mode] == 'synonyms_only' %>
+      <%= f.radio_button :mode, :related_only, label: t('txt.views.similar_terms.related_only'), inline: true, checked: params[:mode] == 'related_only' %>
     </div>
   </div>
 <% end %>
