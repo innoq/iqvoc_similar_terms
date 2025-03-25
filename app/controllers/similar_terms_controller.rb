@@ -38,11 +38,11 @@ class SimilarTermsController < ApplicationController
     lang = params[:lang]
     options = {
       synonyms_only: %w[1 true].include?(params[:synonyms_only]),
-      similar_only: %w[1 true].include?(params[:similar_only]),
+      related_only: %w[1 true].include?(params[:related_only]),
     }
 
-    if options[:synonyms_only] and options[:similar_only]
-      raise InvalidParameterCombinationError.new(:synonyms_only, :similar_only)
+    if options[:synonyms_only] and options[:related_only]
+      raise InvalidParameterCombinationError.new(:synonyms_only, :related_only)
     end
 
     @terms = InlineDataHelper.parse_inline_values(similar_terms_params)

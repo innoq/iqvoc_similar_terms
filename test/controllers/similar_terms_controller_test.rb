@@ -207,7 +207,7 @@ query:top skos:altLabel "real water"@en;
       lang: 'en',
       format: 'ttl',
       terms: 'Water',
-      similar_only: 'true'
+      related_only: 'true'
     }
     assert_response :success
     assert @response.body.include?(<<-EOS.strip)
@@ -217,14 +217,14 @@ query:top skos:altLabel "new water"@en;
     EOS
   end
 
-  test "illegal parameter combination with synonyms_only and similar_only" do
+  test "illegal parameter combination with synonyms_only and related_only" do
     SkosImporter.new('test/concept_test.nt', 'http://localhost:3000/').run
     get :create, params: {
       lang: 'en',
       format: 'ttl',
       terms: 'Water',
       synonyms_only: 'true',
-      similar_only: 'true'
+      related_only: 'true'
     }
     assert_response :bad_request
 
@@ -233,10 +233,10 @@ query:top skos:altLabel "new water"@en;
       format: 'json',
       terms: 'Water',
       synonyms_only: 'true',
-      similar_only: 'true'
+      related_only: 'true'
     }
     assert_response :bad_request
-    assert JSON.parse(@response.body)['message'].include?('The combination of parameters synonyms_only, similar_only is not allowed.')
+    assert JSON.parse(@response.body)['message'].include?('The combination of parameters synonyms_only, related_only is not allowed.')
   end
 
 end

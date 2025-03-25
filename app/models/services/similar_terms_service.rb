@@ -17,7 +17,7 @@ module Services
       results = []
       concepts = base_query(lang, *terms)
 
-      unless options[:similar_only]
+      unless options[:related_only]
         results.concat(concepts.map { |c| c.labelings.map { |ln| ln.target } })
       end
 
@@ -50,7 +50,7 @@ module Services
       concepts = base_query(lang, *terms)
 
       return terms.inject({}) do |memo, term|
-        unless options[:similar_only]
+        unless options[:related_only]
           concepts.each do |concept|
             concept.labelings.each do |ln|
               concept = ln.owner
