@@ -8,8 +8,10 @@ en:
         no_results: No results
         title: Similar Terms
         results_heading: similar terms for '%{terms}'
-        results: Your search <span class="text-primary">%{terms}</span> yielded %{results_size} results
-        synonyms_only: Show synonyms only
+        results: Your search <span class="text-primary">%{terms}</span> yielded %{count} results
+        synonyms_only: synonyms only
+        related_only: related terms only
+        continue_with_term: Continue with "%{term}"
         about:
           title: About similar terms
           description: "The Similar Terms service supports users in generating search queries. It suggest semantically similar words from the vocabulary for the entered search term. This service can be used to semantically extend search queries and improve search results.\n\nSemantically similar is understood to mean synonyms (alternative labels) and terms with a semantic-associative relationship to the search term (related terms)."
