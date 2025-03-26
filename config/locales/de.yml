@@ -14,4 +14,4 @@ de:
         continue_with_term: Mit "%{term}" weitersuchen
         about:
           title: Der Dienst Ähnliche Begriffe
-          description: Zum eingegebenen Suchwort wird eine Auswahl semantisch passender Begriffe aus dem kontrollierten Wortgut vorgeschlagen - Synonyme (alternative Benennungen) und/oder verwandte Begriffe inklusive Ober-/Unterbegriffe.
+          description: Zum eingegebenen Suchwort wird eine Auswahl semantisch passender Begriffe aus dem kontrollierten Wortgut vorgeschlagen - Synonyme (alternative Benennungen) und/oder verwandte Begriffe inklusive Ober-/Unterbegriffen.
