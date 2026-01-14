@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'iqvoc', '~> 4.14.4', github: 'innoq/iqvoc', branch: :main
+gem 'iqvoc', '~> 4.15.0', github: 'innoq/iqvoc', branch: :main
 
 platforms :ruby do
   gem 'pg'
@@ -13,7 +13,7 @@ end
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem "debug", platforms: %i[ windows ]
 end
 
 group :test do
