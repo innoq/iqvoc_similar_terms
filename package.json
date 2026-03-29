@@ -18,7 +18,7 @@
   "homepage": "https://github.com/innoq/iqvoc_similar_terms#readme",
   "devDependencies": {
     "faucet-pipeline-js": "^2.1.7",
-    "faucet-pipeline-jsmin": "^2.1.7",
+    "faucet-pipeline-jsmin": "^3.0.2",
     "faucet-pipeline-sass": "^1.6.0",
     "faucet-pipeline-static": "^1.2.0"
   },
