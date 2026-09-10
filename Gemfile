@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'iqvoc', '~> 4.15.1', github: 'innoq/iqvoc', branch: :main
+gem 'iqvoc', '~> 4.16.0', github: 'innoq/iqvoc', branch: :main
 
 platforms :ruby do
   gem 'pg'
@@ -17,6 +17,6 @@ group :development, :test do
 end
 
 group :test do
-  gem 'iqvoc_skosxl', '~> 2.11.3', github: 'innoq/iqvoc_skosxl', branch: :main
-  gem 'iqvoc_compound_forms', '~> 2.11.3', github: 'innoq/iqvoc_compound_forms', branch: :main
+  gem 'iqvoc_skosxl', '~> 2.12.0', github: 'innoq/iqvoc_skosxl', branch: :main
+  gem 'iqvoc_compound_forms', '~> 2.12.0', github: 'innoq/iqvoc_compound_forms', branch: :main
 end
