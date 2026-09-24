@@ -1,7 +1,7 @@
 <%= bootstrap_form_tag(url: similar_url, method: :get) do |f| %>
-  <div class="p-3 row no-gutters align-items-center bg-white">
+  <div class="p-3 row g-0 align-items-center bg-white">
     <div class="col-auto">
-      <i class="fa fa-search fa-lg"></i>
+      <i class="fa-solid fa-magnifying-glass fa-lg"></i>
     </div>
     <div class="col">
       <%= f.text_field :terms, hide_label: true, autofocus: (@terms ? false : true), wrapper_class: 'mb-0',
@@ -11,7 +11,7 @@
       %>
     </div>
     <div class="col-auto">
-      <%= f.submit t('txt.views.search_results.submit'), class: 'btn btn-block btn-lg btn-primary p-2' %>
+      <%= f.submit t('txt.views.search_results.submit'), class: 'btn w-100 btn-lg btn-primary p-2' %>
     </div>
   </div>
   <div class="py-3 row">

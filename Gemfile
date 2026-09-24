@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'iqvoc', '~> 4.16.0', github: 'innoq/iqvoc', branch: :main
+gem 'iqvoc', '~> 4.16.0', github: 'innoq/iqvoc', branch: 'bootstrap5'
 
 platforms :ruby do
   gem 'pg'
@@ -8,7 +8,6 @@ end
 
 group :development do
   gem 'web-console'
-  gem 'listen'
 end
 
 group :development, :test do
@@ -17,6 +16,6 @@ group :development, :test do
 end
 
 group :test do
-  gem 'iqvoc_skosxl', '~> 2.12.0', github: 'innoq/iqvoc_skosxl', branch: :main
-  gem 'iqvoc_compound_forms', '~> 2.12.0', github: 'innoq/iqvoc_compound_forms', branch: :main
+  gem 'iqvoc_skosxl', '~> 2.12.0', github: 'innoq/iqvoc_skosxl', branch: 'bootstrap5'
+  gem 'iqvoc_compound_forms', '~> 2.12.0', github: 'innoq/iqvoc_compound_forms', branch: 'bootstrap5'
 end
