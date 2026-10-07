@@ -9,6 +9,7 @@ de:
         title: Ähnliche Begriffe
         results_heading: ähnliche Begriffe für '%{terms}'
         results: Ihre Suche nach <span class="text-primary">%{terms}</span> ergab %{count} Treffer
+        mode: Suchmodus
         synonyms_only: Nur Synonyme
         related_only: Nur verwandte Begriffe
         continue_with_term: Mit "%{term}" weitersuchen
