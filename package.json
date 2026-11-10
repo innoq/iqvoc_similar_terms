@@ -22,11 +22,11 @@
   },
   "homepage": "https://github.com/innoq/iqvoc_similar_terms#readme",
   "devDependencies": {
-    "esbuild": "^0.24.0",
-    "sass": "^1.80.0"
+    "esbuild": "^0.28.2",
+    "sass": "^1.108.1"
   },
   "dependencies": {
     "es6-promise": "^4.2.8",
-    "iqvoc": "github:innoq/iqvoc#bootstrap5"
+    "iqvoc": "github:innoq/iqvoc"
   }
 }
