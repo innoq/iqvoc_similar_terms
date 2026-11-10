@@ -1,6 +1,6 @@
 {
   "name": "iqvoc_similar_terms",
-  "version": "2.11.4",
+  "version": "2.13.0",
   "description": "SimilarTerms extension for iQvoc",
   "main": "app/javascript/manifest.js",
   "files": [
